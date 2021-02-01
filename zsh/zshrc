@@ -97,7 +97,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 #
 #
+
 alias n="nvim"
+alias HDFView="$HOME/Applications/HDFView/bin/HDFView"
 
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
 export CUDA_HOME=/usr/local/cuda
@@ -116,14 +118,19 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+export CONDA_ROOT=~/miniconda3
+if [[ -r $CONDA_ROOT/etc/profile.d/bash_completion.sh ]]; then
+    source $CONDA_ROOT/etc/profile.d/bash_completion.sh
+fi
+
  alias ohmyzsh="mate ~/.oh-my-zsh"
 export PYTHONPATH=/home/emanuele/miniconda3/envs/opensfm/lib/python3.6/dist-packages/:$PYTHONPATH
 
+# anaconda autocomplete (conda install argcomplete)
+# eval "$(register-python-argcomplete conda)"
 
 HISTSIZE=10000
 HISEFILESIZE=10000
-
-alias hdfview='/home/emanuele/Applications/hdf_view/HDFView/3.1.1/hdfview.sh'
 
 # Launch Nvidia service
 # sudo modprobe nvidia-uvm
