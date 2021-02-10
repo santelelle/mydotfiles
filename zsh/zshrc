@@ -57,6 +57,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 #
 alias n="nvim"
+alias N="sudo nvim"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -82,3 +83,10 @@ HISEFILESIZE=10000
 export LOGITECH=/etc/logid.cfg
 
 export XDG_CONFIG_HOME="$HOME/.config"
+export NVIMRC="$HOME/.config/nvim/init.vim"
+export ZSHRC="$HOME/.zshrc"
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
+export FZF_DEFAULT_OPTS="--reverse --inline-info --preview 'bat --style=numbers --color=always --line-range :500 {}' --preview-window='right:hidden:wrap' --bind='f2:toggle-preview'"
