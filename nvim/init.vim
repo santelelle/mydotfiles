@@ -216,7 +216,7 @@ nnoremap <C-L> <C-w>l
 nnoremap <C-x><C-l> :call Toggle_dark_light()<CR>
 nnoremap <C-x><C-t> :call Toggle_transparent_background()<CR>  
 " Folder view toggling
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 " Move between tabs
 noremap <leader>1 1gt
 noremap <leader>2 2gt
