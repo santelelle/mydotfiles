@@ -2,45 +2,33 @@
 call plug#begin()
   " LSP
   :Plug 'neovim/nvim-lspconfig'
-
   " commenting
   :Plug 'tpope/vim-commentary'
-
   " Treesitter
   :Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-"  :Plug 'nvim-treesitter/playground'
-
+" "  :Plug 'nvim-treesitter/playground'
   " ALE
   :Plug 'dense-analysis/ale'
-
   " Auto close brakets
-  :Plug 'jiangmiao/auto-pairs'
-
+  " :Plug 'jiangmiao/auto-pairs'
   " Highlighting same word
   :Plug 'RRethy/vim-illuminate'
-
   " Fzf
   :Plug 'junegunn/fzf.vim'
   :Plug 'junegunn/fzf', {'do': { -> fzf#install }}
-
   " Completion
   :Plug 'nvim-lua/completion-nvim'
-
   " Git signs on the left bar
   :Plug 'airblade/vim-gitgutter'
-
   " Tree folder view
   :Plug 'preservim/nerdtree'
-
   " Undotree
   :Plug 'mbbill/undotree'
-
   " Statusbar
   :Plug 'vim-airline/vim-airline'
-
+  :Plug 'bling/vim-bufferline'
   " Git
   :Plug 'tpope/vim-fugitive'
-
   " Others
   :Plug 'tpope/vim-surround'
   :Plug 'sainnhe/gruvbox-material'
@@ -65,6 +53,7 @@ lua << EOF
   require'nvim-treesitter.configs'.setup{
     highlight = {
       enable = true,
+      updatetime = 25,
       use_languagetree = false,
     },
 --    playground = {
@@ -116,15 +105,15 @@ augroup vimrcAutoView
     autocmd BufWinEnter ?* if MakeViewCheck() | silent call LoadView() | endif
 augroup end
 
-" linting
+" Linting
 "let python_provider_script_path = expand('~') . '/.scripts/vim-pythonprovider'
 "if filereadable(python_provider_script_path)
 "	let g:python3_host_prog = system(python_provider_script_path)
 "endif
-let g:ale_linters={'python': ['flake8']}
+" let g:ale_linters={'python': ['pyls']}
 " let g:ale_linters={'python': ['flake8', 'mypy', 'pylint']}
 "let g:ale_fixers={'python': ['black', 'isort']}
-"let g:ale_autopep8 = 1
+let g:ale_autopep8 = 1
 "let g:ale_linters_explicit = 1
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
@@ -273,7 +262,36 @@ colorscheme gruvbox-material
 " Folding
 autocmd Filetype python setlocal foldmethod=indent foldignore=
 
+" Airline, this is needed to be shure that the variable are set after airline is initialized
+let g:airline_section_y = ''
+let g:airline_extensions = ['bufferline', 'hunks']
+function! AirlineInit()
+  " let g:airline_section_y = ''
+  
+  let g:airline_powerline_fonts = 1
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = '☰'
+  let g:airline_symbols.maxlinenr = ''
+  let g:airline_symbols.dirty='⚡'
+
+  " let g:bufferline_echo = 0
+  let g:bufferline_active_buffer_left = '['
+  let g:bufferline_active_buffer_right = ']'
+  let g:bufferline_modified = '+'
+  " let g:bufferline_active_highlight = 'StatusLine'
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
+let g:bufferline_echo = 0
+
 " Sets
+set ignorecase
+set smartcase
+set autochdir
 set updatetime=500
 set mouse=a
 set undofile
@@ -296,7 +314,7 @@ set cursorline
 set formatoptions=jcrql
 set timeoutlen=300
 set scrolloff=20
-
+set shell=/bin/zsh
 
 function! s:check_back_space() abort
 	let col = col('.') - 1
@@ -313,7 +331,7 @@ inoremap <silent><expr> <Up> pumvisible() ? "<C-p>" : "<Up>"
 
 " Personal keybindings
 let mapleader=','
-" Quick fix stuff
+" Quickfix stuff
 command! Cnext try | cnext | catch | cfirst | catch | endtry
 command! Cprev try | cprev | catch | clast | catch | endtry
 cmap cqf ccl
@@ -322,6 +340,8 @@ nnoremap [q :Cprev<CR>
 nnoremap ]q :Cnext<CR>
 nnoremap [Q :cfirst<CR>
 nnoremap ]Q :clast<CR>
+" ALE
+nnoremap <leader>a :ALEToggle<CR>
 " Gitgutter
 let g:gitgutter_sign_added = '🥒'
 let g:gitgutter_sign_modified = '🥔'
@@ -342,7 +362,7 @@ nnoremap <leader>ev :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>s :w<CR>
-nnoremap <leader>q :q<CR>
+nnoremap <leader>q :bp\|bd#<CR>
 nnoremap <leader>wq :wq<CR>
 " change last and next jump keys
 nnoremap <C-i> <C-o>z.
@@ -369,12 +389,17 @@ nnoremap <C-H> <C-w>h
 nnoremap <C-L> <C-w>l
 nnoremap <leader>j <C-W>j
 nnoremap <leader>k <C-W>k
+" move between buffers
+nnoremap <silent> <C-N> :bprevious<CR>
+nnoremap <silent> <C-M> :bnext<CR>
+" open splits
+nnoremap <silent> <leader>v :vsplit<CR>
 " Graphics toggling
 nnoremap <leader>b :call Toggle_dark_light()<CR>
 nnoremap <leader>t :call Toggle_transparent()<CR>
 nnoremap <leader>h :call Toggle_gruvbox_line_highlight()<CR>
 " Folder view toggling
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-b> :NERDTreeToggle<CR>
 " Move between tabs
 noremap <leader>1 1gt
 noremap <leader>2 2gt
@@ -384,3 +409,7 @@ noremap <leader>5 5gt
 noremap <leader>6 6gt
 " current folder terminal launch
 map <F7> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
+
+"Personal commands
+"autocmd FileType python map <buffer> <leader>x :w<CR> :exec '!python' shellescape(@%, 1)<CR>
+nmap <leader>x :w<CR> :exec '!python' shellescape(@%, 1)<CR>
