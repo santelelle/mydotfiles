@@ -7,8 +7,7 @@ call plug#begin()
   " Treesitter
   :Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 " "  :Plug 'nvim-treesitter/playground'
-  " ALE
-  :Plug 'dense-analysis/ale'
+  " :Plug 'dense-analysis/ale'
   " Auto close brakets
   " :Plug 'jiangmiao/auto-pairs'
   " Highlighting same word
@@ -53,7 +52,7 @@ lua << EOF
   require'nvim-treesitter.configs'.setup{
     highlight = {
       enable = true,
-      updatetime = 25,
+      updatetime = 500,
       use_languagetree = false,
     },
 --    playground = {
@@ -313,7 +312,7 @@ set noshowcmd
 set cursorline
 set formatoptions=jcrql
 set timeoutlen=300
-set scrolloff=20
+set scrolloff=1
 set shell=/bin/zsh
 
 function! s:check_back_space() abort
@@ -370,8 +369,10 @@ nnoremap <C-o> <C-i>z.
 nnoremap <C-u> <C-^>
 " Undotree
 nnoremap <leader>u :UndotreeToggle<CR>
-" Fold toggling
+" Folds toggling
 nnoremap zz za
+nnoremap ]z zj
+nnoremap [z zk
 " Remove the stupid x storing in the buffer
 nnoremap x "_x
 " Yank till the end of the line
