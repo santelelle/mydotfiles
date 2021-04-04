@@ -14,7 +14,7 @@ call plug#begin()
   :Plug 'RRethy/vim-illuminate'
   " Fzf
   :Plug 'junegunn/fzf.vim'
-  :Plug 'junegunn/fzf', {'do': { -> fzf#install }}
+"  :Plug 'junegunn/fzf', {'do': { -> fzf#install }}
   " Completion
   :Plug 'nvim-lua/completion-nvim'
   " Git signs on the left bar
@@ -46,8 +46,9 @@ lua << EOF
       require'illuminate'.on_attach(client)
     end,
   }
+ 
   -- completely disable diagnostics
-  vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
+--  vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
 
   require'nvim-treesitter.configs'.setup{
     highlight = {
@@ -359,6 +360,10 @@ nnoremap <leader>f :Lines<CR>
 " Save and loading utils
 nnoremap <leader>ev :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
+nnoremap <leader>eb :e ~/.config/bspwm/bspwmrc<CR>
+nnoremap <leader>ep :e ~/.config/polybar/config<CR>
+nnoremap <leader>es :e ~/.config/sxhkd/sxhkdrc<CR>
+nnoremap <leader>ez :e ~/.zshrc<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>s :w<CR>
 nnoremap <leader>q :bp\|bd#<CR>

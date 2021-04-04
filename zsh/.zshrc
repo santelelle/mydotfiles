@@ -17,16 +17,18 @@ source $ZSH/oh-my-zsh.sh
 alias n="nvim"
 alias N="sudo nvim"
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/opt/anaconda/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/miniconda3/bin:$PATH"
+        export PATH="/opt/anaconda/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -40,12 +42,12 @@ HISEFILESIZE=10000
 # MX master init
 export LOGITECH=/etc/logid.cfg
 
-export XDG_CONFIG_HOME="$HOME/.config"
 export NVIMRC="$HOME/.config/nvim/init.vim"
 export ZSHRC="$HOME/.zshrc"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
 export FZF_DEFAULT_OPTS="--reverse --inline-info --preview 'bat --style=numbers --color=always --line-range :500 {}' --preview-window='right:hidden:wrap' --bind='f2:toggle-preview'"
-export ZSHRC=~/.zshrc
+
+# source local definition files
 source ~/.local_definitions

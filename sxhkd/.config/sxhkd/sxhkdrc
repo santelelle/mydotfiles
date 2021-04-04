@@ -1,0 +1,93 @@
+################ wm independent hotkeys
+
+# terminal emulator
+super + Return
+	st
+
+# program launcher
+super + @space
+	dmenu_run
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+super + g
+	google-chrome-stable
+
+super + e
+	dolphin
+
+################ bspwm hotkeys
+
+# close and kill
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# focus the node in the given direction
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+# swap the node with the one in the given direction, if none move the node in 
+# a new window
+super + shift + {h,j,k,l}
+	d={west,south,north,east}; \
+		bspc node -s $d.local --follow \
+			    || bspc node -m $d --follow
+
+# alternate between the tiled and monocle layout
+super + b
+	bspc desktop -l next
+
+# Toggle floating, tiled
+super + {t,f}
+	bspc node -t {\~tiled,\~floating}
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# Set the node flags.  Locked is a node that cannot be closed with `bspc
+# node --close`.  Marked is a specific selector that allows operating on
+# the given item (such as sending the marked item to the newest
+# preselection).  Sticky stays in the focused desktop.  Private tries to
+# keep its dimensions and tiling position.
+super + {l,m,s,p}
+	bspc node -g {locked,marked,sticky,private}
+
+# Rotate all windows {counter-}clockwise by 90 degrees.
+super + {_,shift + }r
+	bspc node @/ --rotate {90,-90}
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# cancel the preselection for the focused node
+super + ctrl + p
+	bspc node -p cancel
+
+# preselect the ratio
+super + ctrl + {u,i,o}
+	bspc node -o 0.{25,50,75}
+
+# move current node to the preselection
+super + n
+	~/.local/bin/bspwm_smart_presel
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# cycle between nodes
+alt + {_,shift +} Tab
+	bspc node -f {next,prev}.local
+
+# last selected desktop
+super +  Tab
+	bspc desktop -f last
+
