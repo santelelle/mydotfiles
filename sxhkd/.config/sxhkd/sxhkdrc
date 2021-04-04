@@ -18,6 +18,9 @@ super + g
 super + e
 	dolphin
 
+Print + {_, shift}
+	scrot ~/Screens/%b%d_%H%M%S.png {_, -s -f}
+
 ################ bspwm hotkeys
 
 # close and kill
@@ -52,7 +55,7 @@ super + {_,shift + }{1-9,0}
 # the given item (such as sending the marked item to the newest
 # preselection).  Sticky stays in the focused desktop.  Private tries to
 # keep its dimensions and tiling position.
-super + {l,m,s,p}
+super + ctrl + {l,m,s,p}
 	bspc node -g {locked,marked,sticky,private}
 
 # Rotate all windows {counter-}clockwise by 90 degrees.
@@ -83,9 +86,9 @@ super + alt + {h,j,k,l}
 super + alt + shift + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
-# cycle between nodes
-alt + {_,shift +} Tab
-	bspc node -f {next,prev}.local
+# last selected nodes
+alt + Tab
+	bspc node -f last
 
 # last selected desktop
 super +  Tab

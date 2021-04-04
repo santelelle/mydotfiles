@@ -30,8 +30,8 @@ bspc config pointer_follows_monitor true
 bspc config focused_border_color \#466349
 bspc config normal_border_color \#303030
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
+# bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a google_chrome_stable flags=locked
+# bspc rule -a mplayer2 state=floating
+# bspc rule -a Kupfer.py focus=on
+# bspc rule -a Screenkey manage=off
