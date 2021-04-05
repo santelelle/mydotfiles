@@ -2,7 +2,13 @@
 
 # terminal emulator
 super + Return
+	st -e tmux
+
+super + t
 	st
+
+super + n
+	st -e nvim
 
 # program launcher
 super + @space
@@ -55,8 +61,11 @@ super + {_,shift + }{1-9,0}
 # the given item (such as sending the marked item to the newest
 # preselection).  Sticky stays in the focused desktop.  Private tries to
 # keep its dimensions and tiling position.
-super + ctrl + {l,m,s,p}
-	bspc node -g {locked,marked,sticky,private}
+super + ctrl + {m,s,p}
+	bspc node -g {marked,sticky,private}
+
+super + ctrl + shift l
+	bspc node -g locked
 
 # Rotate all windows {counter-}clockwise by 90 degrees.
 super + {_,shift + }r

@@ -15,8 +15,12 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # load Xresources
 xrdb -merge $HOME/.Xresources
 
-bspc monitor eDP-1 -d 1 2 3
-bspc monitor DP-1 -d 4 5 6
+if [[ $my_laptop_external_monitor = *connected* ]]; then
+	bspc monitor DP-1 -d 1 2 3
+	bspc monitor eDP-1 -d 4 5 6
+else
+	bspc monitor eDP-1 -d 1 2 3
+fi
 
 bspc config border_width         3
 bspc config window_gap           5
