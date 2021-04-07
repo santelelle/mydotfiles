@@ -48,6 +48,9 @@ modules-left = bspwm
 modules-center = cpu temperature memory 
 modules-right = pulseaudio wlan battery date
 
+cursor-click = pointer
+cursor-scroll = default
+
 [bar/top_external]
 monitor = DP-1
 
@@ -73,9 +76,9 @@ modules-right = pulseaudio wlan battery powermenu date
 tray-position = right
 tray-padding = 2
 wm-restack = bspwm
-override-redirect = true
-scroll-up = bspwm-desknext
-scroll-down = bspwm-deskprev
+;override-redirect = true
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
 
 cursor-click = pointer
 cursor-scroll = default
@@ -135,7 +138,7 @@ label = %percentage_used%%
 [module/wlan]
 type = internal/network
 interface = wlp0s20f3
-interval = 3.0
+interval = 1.0
 
 ; Available tokens:
 ;   %ifname%    [wireless+wired]
@@ -159,11 +162,11 @@ ramp-signal-1-foreground = #F07127
 ramp-signal-2 = 
 ramp-signal-2-foreground = #F9CE56
 ramp-signal-3 = 
-ramp-signal-3-foreground = ${colors.purple}
+ramp-signal-3-foreground = ${colors.primal}
 ramp-signal-4 = 
-ramp-signal-4-foreground = ${colors.purple}
+ramp-signal-4-foreground = ${colors.primal}
 ramp-signal-5 = 
-ramp-signal-5-foreground = ${colors.purple}
+ramp-signal-5-foreground = ${colors.primal}
 
 ; [module/eth]
 ; type = internal/network

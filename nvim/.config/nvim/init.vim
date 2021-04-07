@@ -315,6 +315,7 @@ set formatoptions=jcrql
 set timeoutlen=300
 set scrolloff=1
 set shell=/bin/zsh
+set foldcolumn=auto:9
 
 function! s:check_back_space() abort
 	let col = col('.') - 1
@@ -374,7 +375,7 @@ nnoremap <C-o> <C-i>z.
 nnoremap <C-u> <C-^>
 " Undotree
 nnoremap <leader>u :UndotreeToggle<CR>
-" Folds toggling
+" Folds
 nnoremap zz za
 nnoremap ]z zj
 nnoremap [z zk

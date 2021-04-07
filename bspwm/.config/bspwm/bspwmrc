@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# load Xresources
+xrdb -merge $HOME/.Xresources
+
 # run the xrandr command if an external monitor is connected to the
 # laptop.  This must be executed before the polybar command, so that
 # polybar can set the two separate bars properly.
@@ -10,17 +13,14 @@ fi
 
 $XDG_CONFIG_HOME/polybar/launch.sh
 
-pgrep -x sxhkd > /dev/null || sxhkd &
-
-# load Xresources
-xrdb -merge $HOME/.Xresources
-
 if [[ $my_laptop_external_monitor = *connected* ]]; then
 	bspc monitor DP-1 -d 1 2 3
 	bspc monitor eDP-1 -d 4 5 6
 else
 	bspc monitor eDP-1 -d 1 2 3
 fi
+
+pgrep -x sxhkd > /dev/null || sxhkd &
 
 bspc config border_width         3
 bspc config window_gap           5
