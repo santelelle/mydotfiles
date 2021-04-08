@@ -76,9 +76,6 @@ modules-right = pulseaudio wlan battery powermenu date
 tray-position = right
 tray-padding = 2
 wm-restack = bspwm
-;override-redirect = true
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
 
 cursor-click = pointer
 cursor-scroll = default
@@ -162,11 +159,11 @@ ramp-signal-1-foreground = #F07127
 ramp-signal-2 = 
 ramp-signal-2-foreground = #F9CE56
 ramp-signal-3 = 
-ramp-signal-3-foreground = ${colors.primal}
+ramp-signal-3-foreground = ${colors.primary}
 ramp-signal-4 = 
-ramp-signal-4-foreground = ${colors.primal}
+ramp-signal-4-foreground = ${colors.primary}
 ramp-signal-5 = 
-ramp-signal-5-foreground = ${colors.primal}
+ramp-signal-5-foreground = ${colors.primary}
 
 ; [module/eth]
 ; type = internal/network

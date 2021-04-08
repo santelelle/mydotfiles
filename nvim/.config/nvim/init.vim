@@ -14,7 +14,7 @@ call plug#begin()
   :Plug 'RRethy/vim-illuminate'
   " Fzf
   :Plug 'junegunn/fzf.vim'
-"  :Plug 'junegunn/fzf', {'do': { -> fzf#install }}
+  :Plug 'junegunn/fzf', {'do': { -> fzf#install }}
   " Completion
   :Plug 'nvim-lua/completion-nvim'
   " Git signs on the left bar
@@ -53,7 +53,7 @@ lua << EOF
   require'nvim-treesitter.configs'.setup{
     highlight = {
       enable = true,
-      updatetime = 500,
+      updatetime = 2000,
       use_languagetree = false,
     },
 --    playground = {

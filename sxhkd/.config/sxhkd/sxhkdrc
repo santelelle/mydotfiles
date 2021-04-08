@@ -21,11 +21,18 @@ super + Escape
 super + g
 	google-chrome-stable
 
-super + e
+super + shift + e
 	dolphin
 
-Print + {_, shift}
-	scrot ~/Screens/%b%d_%H%M%S.png {_, -s -f}
+super + e
+	st -e ranger
+
+Print + shift
+	scrot ~/Screens/%b%d_%H%M%S.png
+
+# save the screen in tmp and copy it to the clipboard
+Print
+	scrot '/tmp/clip.png' -s -f -e 'xclip -selection clipboard -target image/png -i $f'
 
 ################ bspwm hotkeys
 
@@ -71,20 +78,16 @@ super + ctrl + shift l
 super + {_,shift + }r
 	bspc node @/ --rotate {90,-90}
 
-# preselect the direction
+# preselect the direction, double click to deselect
 super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
-
-# cancel the preselection for the focused node
-super + ctrl + p
-	bspc node -p cancel
+	bspc node --presel-dir '~{west,south,north,east}'
 
 # preselect the ratio
 super + ctrl + {u,i,o}
 	bspc node -o 0.{25,50,75}
 
 # move current node to the preselection
-super + n
+super + ctrl + n
 	~/.local/bin/bspwm_smart_presel
 
 # expand a window by moving one of its side outward
