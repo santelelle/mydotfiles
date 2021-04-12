@@ -16,6 +16,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias n="nvim"
 alias N="sudo nvim"
+alias r="ranger"
 
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -51,3 +52,7 @@ export FZF_DEFAULT_OPTS="--reverse --inline-info --preview 'bat --style=numbers 
 
 # source local definition files
 source ~/.local_definitions
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
