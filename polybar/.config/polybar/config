@@ -70,7 +70,7 @@ font-2 = "FontAwesome:size=10;1"
 font-3 = "Symbola:size=10;1"
 
 modules-left = bspwm
-modules-center = cpu temperature memory 
+modules-center = cpu temperature fanspeed memory 
 modules-right = pulseaudio wlan battery powermenu date
 
 tray-position = right
@@ -246,13 +246,14 @@ format-discharging = <label-discharging>
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 60
+warn-temperature = 70
 
 format = <label>
-; format = <ramp> <label>
 format-warn = <label-warn>
-; format-warn = <ramp> <label-warn>
 format-warn-underline = ${colors.primary}
+
+format-prefix = "TEMP "
+format-prefix-foreground = ${colors.foreground-alt}
 
 label = %temperature-c%
 label-warn = %temperature-c%
@@ -262,6 +263,17 @@ ramp-0 =
 ramp-1 =
 ramp-2 =
 ramp-foreground = ${colors.foreground-alt}
+
+[module/fanspeed]
+type = custom/script
+
+exec = sensors | grep fan1 | awk '{print $2}'
+
+format-prefix = "FAN "
+format-prefix-foreground = ${colors.foreground-alt}
+; format-suffix = "🌀"
+; format-suffix-foreground = ${colors.foreground-alt}
+interval = 2
 
 [module/powermenu]
 type = custom/menu

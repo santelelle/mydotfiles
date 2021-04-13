@@ -44,6 +44,4 @@ bspc rule -a zoom state=floating
 
 # scratchpad
 bspc rule -a scratchpad sticky=on state=floating hidden=on
-# check scratchpad already running
-[ "$(ps -x | grep -c 'scratchpad')" -eq "1" ] && st -c scratchpad -e ~/.local/bin/scratch &
-
+st -c scratchpad &
