@@ -31,6 +31,7 @@ call plug#begin()
   " Others
   :Plug 'tpope/vim-surround'
   :Plug 'sainnhe/gruvbox-material'
+  :Plug 'sunjon/shade.nvim'
 call plug#end()
 
 lua << EOF
@@ -47,7 +48,7 @@ lua << EOF
     end,
   }
  
-  -- completely disable diagnostics
+-- completely disable diagnostics
 --  vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
 
   require'nvim-treesitter.configs'.setup{
@@ -56,12 +57,17 @@ lua << EOF
       updatetime = 2000,
       use_languagetree = false,
     },
---    playground = {
---      enable = true,
---      updatetime = 25,
---      persist_queries = false,
---    },
   }
+
+--  require'shade'.setup{
+--    overlay_opacity = 50,
+--    opacity_step = 1,
+--    keys = {
+--      brightness_up    = '<C-Up>',
+--      brightness_down  = '<C-Down>',
+--      toggle           = '<Leader>s',
+--    }
+--  }
 EOF
 
 " AUTOSTORE VIEW
