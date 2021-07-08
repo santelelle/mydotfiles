@@ -407,16 +407,12 @@
           "label": "F9"
         },
         {
-          "keyCode": 65535,
-          "label": "",
-          "extraLabel": "TRANS",
-          "verbose": "Transparent"
+          "keyCode": 67,
+          "label": "F10"
         },
         {
-          "keyCode": 65535,
-          "label": "",
-          "extraLabel": "TRANS",
-          "verbose": "Transparent"
+          "keyCode": 68,
+          "label": "F11"
         },
         {
           "keyCode": 70,
@@ -5107,8 +5103,8 @@
       15,
       15,
       1,
-      15,
-      15,
+      3,
+      3,
       3,
       3,
       3,
