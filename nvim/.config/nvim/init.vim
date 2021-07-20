@@ -266,7 +266,32 @@ let g:gruvbox_material_palette = t:my_dark_palette
 colorscheme gruvbox-material
 
 " Folding
+" set foldmethod=manual
+" set foldmethod=expr
 autocmd Filetype python setlocal foldmethod=indent foldignore=
+" autocmd Filetype python setlocal foldmethod=expr
+"set foldexpr=FoldMethod(v:lnum)
+
+"function! FoldMethod(lnum)
+"  "get string of current line
+"  let crLine=getline(a:lnum)
+
+"  " check if empty line 
+"  if empty(crLine) "Empty line or end comment 
+"    return -1 " so same indent level as line before 
+"  endif 
+
+"  " check if comment 
+"  let a:data=join( map(synstack(a:lnum, 1), 'synIDattr(v:val, "name")') )
+"  if a:data =~ ".*omment.*"
+"    return '='
+"  endif
+
+"  "Otherwise return foldlevel equal to indent /shiftwidth (like if
+"  "foldmethod=indent)
+"  else  "return indent base fold
+"    return indent(a:lnum)/&shiftwidth
+"endfunction
 
 " Airline, this is needed to be shure that the variable are set after airline is initialized
 let g:airline_section_y = ''
@@ -371,9 +396,11 @@ nnoremap <leader>eb :e ~/.config/bspwm/bspwmrc<CR>
 nnoremap <leader>ep :e ~/.config/polybar/config<CR>
 nnoremap <leader>es :e ~/.config/sxhkd/sxhkdrc<CR>
 nnoremap <leader>ez :e ~/.zshrc<CR>
+nnoremap <leader>el :e ~/.config/logid.cfg<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>s :w<CR>
-nnoremap <leader>q :bp\|bd#<CR>
+" nnoremap <leader>q :bp\|bd#<CR>
+nnoremap <leader>q :q<CR>
 nnoremap <leader>wq :wq<CR>
 " change last and next jump keys
 nnoremap <C-i> <C-o>z.

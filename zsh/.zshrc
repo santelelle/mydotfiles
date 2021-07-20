@@ -18,7 +18,7 @@ alias n="nvim"
 alias N="sudo nvim"
 alias r="ranger"
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:/opt:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -40,11 +40,14 @@ alias ohmyzsh="mate ~/.oh-my-zsh"
 HISTSIZE=10000
 HISEFILESIZE=10000
 
-# MX master init
-export LOGITECH=/etc/logid.cfg
-
 export NVIMRC="$HOME/.config/nvim/init.vim"
 export ZSHRC="$HOME/.zshrc"
+
+alias sz="source $ZSHRC"
+
+# export default editor and visual
+export VISUAL=nvim
+export EDITOR=nvim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
@@ -56,3 +59,12 @@ source ~/.local_definitions
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+# git
+alias gs="git status"
+alias gl="git log"
+alias ga="git add"
+alias ga.="git add ."
+alias gc="git commit -m"
+alias gca="git commit --amend"
+alias gp="git push"

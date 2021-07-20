@@ -45,7 +45,7 @@ font-2 = "FontAwesome:size=10;1"
 font-3 = "Symbola:size=10;1"
 
 modules-left = bspwm
-modules-center = cpu temperature memory 
+modules-center = cpu temperature fanspeed memory 
 modules-right = pulseaudio wlan battery date
 
 cursor-click = pointer
@@ -53,6 +53,36 @@ cursor-scroll = default
 
 [bar/top_external]
 monitor = DP-1
+
+height = 26
+radius = 6.0
+fixed-center = true
+padding-right = 1
+module-margin-left = 1
+module-margin-right = 1
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = "Fira Code:size=10;1"
+font-1 = "Fira Code:size=10:style=Bold;1"
+font-2 = "FontAwesome:size=10;1"
+font-3 = "Symbola:size=10;1"
+
+modules-left = bspwm
+modules-center = cpu temperature fanspeed memory 
+modules-right = pulseaudio wlan battery powermenu date
+
+tray-position = right
+tray-padding = 2
+wm-restack = bspwm
+
+cursor-click = pointer
+cursor-scroll = default
+
+
+[bar/top_main]
+monitor = eDP-1
 
 height = 26
 radius = 6.0
@@ -102,19 +132,6 @@ label-empty = %name%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
-
-[module/mpd]
-type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
-label-song-maxlen = 25
-label-song-ellipsis = true
 
 [module/cpu]
 type = internal/cpu
@@ -246,7 +263,7 @@ format-discharging = <label-discharging>
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 70
+warn-temperature = 75
 
 format = <label>
 format-warn = <label-warn>

@@ -1,0 +1,1 @@
+run logid -c to set the configuration path to .config/logid.cfg
