@@ -6,6 +6,9 @@ if [ -z $1 ]; then
 fi
     
 pids=$(xdotool search --class ${1})
+if [ -z $pids ]; then
+	st -c $1
+fi
 for pid in $pids; do
 	echo "Toggle $pid"
 	bspc node $pid --flag hidden -f

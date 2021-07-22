@@ -64,7 +64,7 @@ super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
 
 ctrl + space
-	~/.config/bspwmrc/scratch scratchpad
+	~/.config/bspwm/scratch scratchpad
 # ctrl + space
 # 	id=$(cat /tmp/scratchid);\
 # 	bspc node $id --flag hidden;bspc node -f $id

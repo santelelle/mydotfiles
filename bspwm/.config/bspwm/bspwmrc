@@ -49,4 +49,3 @@ bspc rule -a zoom state=floating
 
 # scratchpad
 bspc rule -a scratchpad sticky=on state=floating hidden=on
-st -c scratchpad &
