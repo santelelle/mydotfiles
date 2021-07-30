@@ -48,8 +48,10 @@ modules-left = bspwm
 modules-center = cpu temperature fanspeed memory 
 modules-right = pulseaudio wlan battery date
 
-cursor-click = pointer
+; cursor-click = pointer
 cursor-scroll = default
+scroll-up = bspwm.prev
+scroll-down = bspwm.next
 
 [bar/top_external]
 monitor = DP-1
@@ -77,9 +79,10 @@ tray-position = right
 tray-padding = 2
 wm-restack = bspwm
 
-cursor-click = pointer
+; cursor-click = pointer
 cursor-scroll = default
-
+scroll-up = bspc desktop -f prev.local
+scroll-down = bspc desktop -f next.local
 
 [bar/top_main]
 monitor = eDP-1
@@ -107,31 +110,39 @@ tray-position = right
 tray-padding = 2
 wm-restack = bspwm
 
-cursor-click = pointer
+; cursor-click = pointer
 cursor-scroll = default
+scroll-up = bspc desktop -f prev.local
+scroll-down = bspc desktop -f next.local
 
 [module/bspwm]
 type = internal/bspwm
 
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; But if you rename your bspwm monitors with bspc -n this option will no longer
+; behave correctly.
+; Default: true
 pin-workspace = true
 
-label-focused = %{T2}%name%
-label-focused-background = ${colors.primary}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+; Output mode flags after focused state label
+; Default: false
+inline-mode = false
 
-label-occupied = %name%
-label-occupied-padding = 2
+; disabled because the global one is enabled
+enable-scroll = false
+
+label-occupied = %{T1}%name%
 label-occupied-background = ${colors.background-alt}
+label-occupied-padding = 2
 
-label-urgent = %name%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %name%
+label-empty = %{T1}%name%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
+label-focused = %{T2}%name%
+label-focused-background = ${colors.primary}
+label-focused-padding = 2
 
 [module/cpu]
 type = internal/cpu
@@ -331,5 +342,4 @@ screenchange-reload = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
-
 ; vim:ft=dosini
