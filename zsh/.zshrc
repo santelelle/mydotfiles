@@ -32,6 +32,7 @@ alias p="xclip -o"
 alias n="nvim"
 alias N="sudo nvim"
 alias r="ranger"
+alias cl="clear"
 
 # fzf stuff
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

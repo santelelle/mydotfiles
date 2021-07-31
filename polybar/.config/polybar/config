@@ -26,9 +26,7 @@ primary = ${xrdb:color2:#466349}
 secondary = ${xrdb:color10:#e60053}
 alert = ${xrdb:color1:#bd2c40}
 
-[bar/top]
-monitor = eDP-1
-
+[section/polybar_common]
 height = 26
 radius = 6.0
 fixed-center = true
@@ -44,76 +42,38 @@ font-1 = "Fira Code:size=12:style=Bold;1"
 font-2 = "FontAwesome:size=10;1"
 font-3 = "Symbola:size=10;1"
 
-modules-left = bspwm
-modules-center = cpu temperature fanspeed memory 
-modules-right = pulseaudio wlan battery date
-
-; cursor-click = pointer
 cursor-scroll = default
 scroll-up = bspwm.prev
 scroll-down = bspwm.next
+enable-ipc = true
 
-[bar/top_external]
-monitor = DP-1
-
-height = 26
-radius = 6.0
-fixed-center = true
-padding-right = 1
-module-margin-left = 1
-module-margin-right = 1
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-font-0 = "Fira Code:size=10;1"
-font-1 = "Fira Code:size=10:style=Bold;1"
-font-2 = "FontAwesome:size=10;1"
-font-3 = "Symbola:size=10;1"
-
-modules-left = bspwm
-modules-center = cpu temperature fanspeed memory 
-modules-right = pulseaudio wlan battery powermenu date
-
-tray-position = right
-tray-padding = 2
-wm-restack = bspwm
-
-; cursor-click = pointer
-cursor-scroll = default
-scroll-up = bspc desktop -f prev.local
-scroll-down = bspc desktop -f next.local
-
-[bar/top_main]
+[bar/laptop]
+inherit = section/polybar_common
 monitor = eDP-1
 
-height = 26
-radius = 6.0
-fixed-center = true
-padding-right = 1
-module-margin-left = 1
-module-margin-right = 1
+modules-left = bspwm
+modules-center = cpu temperature fanspeed memory 
+modules-right = backlight pulseaudio wlan battery date
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+tray-position = left
+tray-offset-x = 10%
+tray-padding = 2
+tray-detached = true
+wm-restack = bspwm
 
-font-0 = "Fira Code:size=10;1"
-font-1 = "Fira Code:size=10:style=Bold;1"
-font-2 = "FontAwesome:size=10;1"
-font-3 = "Symbola:size=10;1"
+[bar/external]
+inherit = section/polybar_common
+monitor = ${env:MAIN_MONITOR}
 
 modules-left = bspwm
 modules-center = cpu temperature fanspeed memory 
-modules-right = pulseaudio wlan battery powermenu date
+modules-right = external_backlight_first_call external_backlight_ipc pulseaudio wlan battery powermenu date
 
-tray-position = right
+tray-position = left
+tray-offset-x = 10%
 tray-padding = 2
+tray-detached = true
 wm-restack = bspwm
-
-; cursor-click = pointer
-cursor-scroll = default
-scroll-up = bspc desktop -f prev.local
-scroll-down = bspc desktop -f next.local
 
 [module/bspwm]
 type = internal/bspwm
@@ -132,17 +92,17 @@ inline-mode = false
 ; disabled because the global one is enabled
 enable-scroll = false
 
-label-occupied = %{T1}%name%
+label-focused = %{T2}%name%%{T1}
+label-focused-background = ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %name%
 label-occupied-background = ${colors.background-alt}
 label-occupied-padding = 2
 
-label-empty = %{T1}%name%
+label-empty = %name%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
-
-label-focused = %{T2}%name%
-label-focused-background = ${colors.primary}
-label-focused-padding = 2
 
 [module/cpu]
 type = internal/cpu
@@ -330,6 +290,90 @@ menu-2-0 = power off
 menu-2-0-exec = poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+; (unreleased)
+; Use the `/sys/class/backlight/actual-brightness` file
+; rather than the regular `brightness` file.
+; Defaults to true unless the specified card is an amdgpu backlight.
+use-actual-brightness = true
+
+; Enable changing the backlight with the scroll wheel
+; NOTE: This may require additional configuration on some systems. Polybar will
+; write to `/sys/class/backlight/${self.card}/brightness` which requires polybar
+; to have write access to that file.
+; DO NOT RUN POLYBAR AS ROOT. 
+; The recommended way is to add the user to the
+; `video` group and give that group write-privileges for the `brightness` file.
+; See the ArchWiki for more information:
+; https://wiki.archlinux.org/index.php/Backlight#ACPI
+; Default: false
+enable-scroll = true
+
+; Additional formatting
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format =  <label> <bar>
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <bar> is used
+bar-width = 10
+bar-foreground-0 = #55aa55
+bar-foreground-1 = #55aa55
+bar-foreground-2 = #55aa55
+bar-foreground-3 = #55aa55
+bar-foreground-4 = #55aa55
+bar-foreground-5 = #f5a70a
+bar-foreground-6 = #ff5555
+bar-gradient = false
+bar-indicator = |
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/external_backlight_ipc]
+; control the external monitor brightness (not the actual backlight power)
+type = custom/ipc
+;
+; Define the command to be executed when the hook is triggered
+; Available tokens:
+;   %pid% (id of the parent polybar process)
+;
+; get the current brigthness
+; hook-0 = echo '%{T2}ciao'
+hook-0 = echo $(xrandr --verbose | grep ^$MAIN_MONITOR -A5 | tail -n1 | awk '{print $2*100}')
+format =  <output>%
+
+scroll-up = systemctl --user kill -s SIGKILL redshift.service && xrandr --output $MAIN_MONITOR --brightness 1.0 && polybar-msg hook external_backlight_ipc 1 && systemctl --user start redshift.service
+scroll-down = systemctl --user kill -s SIGKILL redshift.service && xrandr --output $MAIN_MONITOR --brightness 0.5 && polybar-msg hook external_backlight_ipc 1 && systemctl --user start redshift.service
+; click-left = systemctl --user start redshift.service
+
+[module/external_backlight_first_call]
+; this is just needed to initialize without any click <external_backlight_ipc>
+type = custom/script
+; Available tags:
+;   <output> - deprecated
+;   <label> (default)
+format = <label>
+; this command must have empty label because the default output is the call to the hook function
+label =
+
+exec = polybar-msg hook external_backlight_ipc 1
+interval = 600
 
 [settings]
 screenchange-reload = true

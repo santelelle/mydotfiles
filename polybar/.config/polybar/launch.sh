@@ -6,14 +6,15 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-xrandr --query | grep -w 'DP-1' | grep -w connected
-external_monitor_connected=$?  # this is 0 if the monitor is connected
-
-if [ $external_monitor_connected -eq 0 ]; then
-	polybar top &
-	polybar top_external &
+if [ -n $SECOND_MONITOR ]; then
+	echo "launching polybar on two screens"
+	# launch external second such that the tray is visible in this monitor
+	polybar external &
+	sleep 0.2
+	polybar laptop &
 else
-	polybar top_main &
+	echo "launching polybar on a single screen"
+	polybar laptop &
 fi
 
 echo "Polybar launched..."
