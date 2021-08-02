@@ -187,13 +187,24 @@ label = %time% %date%
 
 [module/pulseaudio]
 type = internal/pulseaudio
-
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
 format-volume = <label-volume> <bar-volume>
+; Available tokens:
+;   %percentage% (default)
+;   %decibels%
+;label-volume = %percentage%%
 label-volume =  %percentage%%
 label-volume-foreground = ${colors.foreground}
-
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+;format-muted = <label-muted>
 label-muted =  muted
-label-muted-foreground = #666
+label-muted-foreground = ${colors.alert}
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -211,6 +222,9 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+
+click-middle = pulseaudio-equalizer-gtk
+click-right = 
 
 [module/battery]
 type = internal/battery
