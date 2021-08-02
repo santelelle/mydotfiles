@@ -1,0 +1,25 @@
+let mapleader = ","
+# invert <C-o> and <C-i> and move cursor in the top middle of the screed
+nnoremap <C-o> <C-i>zz10<C-e>
+nnoremap <C-i> <C-o>zz10<C-e>
+nnoremap <leader>sv :source ~/.ideavimrc<CR>
+nnoremap zz za
+nnoremap ]z zj
+nnoremap [z zk
+" Remove the stupid x storing in the buffer
+nnoremap x "_x
+" Yank till the end of the line
+nnoremap Y y$
+" joinlines with H
+nnoremap H J
+" move up and down one line
+nnoremap J j<C-e>
+nnoremap K k<C-y>
+" move screen down half page
+nnoremap <C-K> <C-u>z.
+nnoremap <C-J> <C-d>z.
+
+set easymotion
+set surround
+set commentary
+set relativenumber
