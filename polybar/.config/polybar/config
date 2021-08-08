@@ -372,8 +372,8 @@ type = custom/ipc
 hook-0 = echo $(xrandr --verbose | grep ^$MAIN_MONITOR -A5 | tail -n1 | awk '{print $2*100}')
 format =  <output>%
 
-scroll-up = systemctl --user kill -s SIGKILL redshift.service && xrandr --output $MAIN_MONITOR --brightness 1.0 && polybar-msg hook external_backlight_ipc 1 && systemctl --user start redshift.service
-scroll-down = systemctl --user kill -s SIGKILL redshift.service && xrandr --output $MAIN_MONITOR --brightness 0.5 && polybar-msg hook external_backlight_ipc 1 && systemctl --user start redshift.service
+scroll-up = systemctl --user kill -s SIGKILL redshift.service && redshift -x && xrandr --output $MAIN_MONITOR --brightness 1.0 && polybar-msg hook external_backlight_ipc 1 && systemctl --user start redshift.service
+scroll-down = systemctl --user kill -s SIGKILL redshift.service && redshift -x && xrandr --output $MAIN_MONITOR --brightness 0.5 && polybar-msg hook external_backlight_ipc 1 && systemctl --user start redshift.service
 ; click-left = systemctl --user start redshift.service
 
 [module/external_backlight_first_call]
