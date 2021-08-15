@@ -18,6 +18,14 @@ super + @space
 super + Escape
 	pkill -USR1 -x sxhkd
 
+# open bspwm config and load it
+super + b
+	st -e nvim $HOME/.config/bspwm/bspwmrc && $HOME/.config/bspwm/bspwmrc
+
+# open the util to check the xwindow name
+super + w
+	st -e sh -c 'xprop && read line'
+
 super + g
 	google-chrome-stable
 
@@ -52,7 +60,7 @@ super + shift + {h,j,k,l}
 			    || bspc node -m $d --follow
 
 # alternate between the tiled and monocle layout
-super + b
+super + d
 	bspc desktop -l next
 
 # Toggle floating, tiled
