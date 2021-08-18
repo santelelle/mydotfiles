@@ -138,8 +138,10 @@ interval = 1.0
 ;label-connected-foreground = #eefafafa
 
 format-connected = <ramp-signal> <label-connected>
-label-connected =  %signal%% %upspeed:2% %downspeed:2%
+label-connected =  %signal%% %upspeed% %downspeed%
 
+udspeed-minwidth = 3
+downspeed-minwidth = 3
 ramp-signal-0 = 
 ramp-signal-0-foreground = #F03051
 ramp-signal-1 = 
