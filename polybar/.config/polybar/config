@@ -17,10 +17,10 @@
 ;==========================================================
 
 [colors]
-background = ${xrdb:color0:#222}
-background-alt = ${xrdb:color8:#222}
 foreground = ${xrdb:color15:#444}
 foreground-alt = ${xrdb:color2:#444}
+background = ${xrdb:color0:#222}
+background-alt = ${xrdb:color8:#222}
 
 primary = ${xrdb:color2:#466349}
 secondary = ${xrdb:color10:#e60053}
@@ -106,24 +106,99 @@ label-empty-padding = 2
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-format-prefix = "CPU "
+interval = 0.2
+
+format = <ramp-coreload>
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
-label = %percentage:2%%
+format-prefix = "CPU "
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = ${colors.background-alt}
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = ${colors.background-alt}
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = ${colors.primary}
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = ${colors.primary}
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = ${colors.secondary}
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = ${colors.secondary}
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = ${colors.alert}
+ramp-coreload-7 = █
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = ${colors.alert}
+
+bar-load-width = 20
+bar-load-foreground-0 = #55aa55
+bar-load-foreground-1 = #55aa55
+bar-load-foreground-2 = #f5a70a
+bar-load-foreground-3 = #ff5555
+bar-load-gradient = false
+bar-load-indicator = │
+bar-load-indicator-font = 2
+bar-load-indicator-foreground = #ff
+bar-load-fill = ━
+bar-load-fill-font = 2
+bar-load-empty = ━
+bar-load-empty-font = 2
+bar-load-empty-foreground = #444444
 
 [module/memory]
 type = internal/memory
-interval = 2
 format-prefix = "RAM "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
-label = %percentage_used%%
+format-prefix-foreground = ${colors.primary}
+format = <bar-used>
+
+bar-used-width = 30
+bar-used-foreground-0 = ${colors.primary}
+bar-used-foreground-1 = ${colors.primary}
+bar-used-foreground-2 = ${colors.alert}
+bar-used-foreground-3 = ${colors.alert}
+bar-used-indicator = |
+bar-used-indicator-font = 2
+bar-used-fill = ─
+bar-used-fill-font = 2
+bar-used-empty = ─
+bar-used-empty-font = 2
+bar-used-empty-foreground = ${colors.background-alt}
 
 [module/wlan]
 type = internal/network
+; Name of the network interface to display. You can get the names of the
+; interfaces on your machine with `ip link`
+; Wireless interfaces often start with `wl` and ethernet interface with `eno` or `eth`
 interface = wlp0s20f3
+; Seconds to sleep between updates
+; Default: 1
 interval = 1.0
+
+; Test connectivity every Nth update
+; A value of 0 disables the feature
+; NOTE: Experimental (needs more testing)
+; Default: 0
+ping-interval = 3
+
+; Available tags:
+;   <label-connected> (default)
+;   <ramp-signal>
+format-connected = <ramp-signal> <label-connected>
+; Available tags:
+;   <label-disconnected> (default)
+format-disconnected = <label-disconnected>
+; Available tags:
+;   <label-connected> (default)
+;   <label-packetloss>
+;   <animation-packetloss>
+format-packetloss = <animation-packetloss> <label-connected>
 
 ; Available tokens:
 ;   %ifname%    [wireless+wired]
@@ -136,12 +211,11 @@ interval = 1.0
 ; Default: %ifname% %local_ip%
 ;label-connected = %essid% %downspeed:9%
 ;label-connected-foreground = #eefafafa
+label-connected = %essid% %upspeed:8:8% %downspeed:8:8%
 
-format-connected = <ramp-signal> <label-connected>
-label-connected =  %signal%% %upspeed% %downspeed%
+; Default: (none)
+label-disconnected = not connected
 
-udspeed-minwidth = 3
-downspeed-minwidth = 3
 ramp-signal-0 = 
 ramp-signal-0-foreground = #F03051
 ramp-signal-1 = 
@@ -154,6 +228,14 @@ ramp-signal-4 = 
 ramp-signal-4-foreground = ${colors.primary}
 ramp-signal-5 = 
 ramp-signal-5-foreground = ${colors.primary}
+
+; Only applies if <animation-packetloss> is used
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
 
 ; [module/eth]
 ; type = internal/network
@@ -173,19 +255,11 @@ ramp-signal-5-foreground = ${colors.primary}
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 0.01
 
-date = " %d-%m-%Y"
-date-alt = " %Y-%m-%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
-
-label = %time% %date% 
+date = " %d/%m/%Y "
+time = %H:%M:%S
+label = %date% %time% 
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -209,13 +283,13 @@ label-muted =  muted
 label-muted-foreground = ${colors.alert}
 
 bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
+bar-volume-foreground-0 = ${colors.primary}
+bar-volume-foreground-1 = ${colors.primary}
+bar-volume-foreground-2 = ${colors.primary}
+bar-volume-foreground-3 = ${colors.primary}
+bar-volume-foreground-4 = ${colors.primary}
+bar-volume-foreground-5 = ${colors.alert}
+bar-volume-foreground-6 = ${colors.alert}
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
@@ -223,7 +297,7 @@ bar-volume-fill = ─
 bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.background-alt}
 
 click-middle = pulseaudio-equalizer-gtk
 click-right = 
@@ -343,7 +417,7 @@ type = custom/menu
 expand-right = true
 format-spacing = 1
 
-label-open = 
+label-open = " "
 label-open-foreground = ${colors.foreground-alt}
 label-close = cancel
 label-close-foreground = ${colors.foreground-alt}
@@ -352,18 +426,24 @@ label-separator-foreground = ${colors.foreground-alt}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
+menu-0-0-foreground = ${colors.alert}
 menu-0-1 = power off
 menu-0-1-exec = menu-open-2
+menu-0-1-foreground = ${colors.alert}
 
 menu-1-0 = cancel
 menu-1-0-exec = menu-open-0
+menu-1-0-foreground = ${colors.foreground-alt}
 menu-1-1 = reboot
 menu-1-1-exec = reboot
+menu-1-1-foreground = ${colors.alert}
 
 menu-2-0 = power off
 menu-2-0-exec = poweroff
+menu-2-0-foreground = ${colors.alert}
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+menu-2-1-foreground = ${colors.foreground-alt}
 
 [module/backlight]
 type = internal/backlight
@@ -403,13 +483,13 @@ label = %percentage%%
 
 ; Only applies if <bar> is used
 bar-width = 10
-bar-foreground-0 = #55aa55
-bar-foreground-1 = #55aa55
-bar-foreground-2 = #55aa55
-bar-foreground-3 = #55aa55
-bar-foreground-4 = #55aa55
-bar-foreground-5 = #f5a70a
-bar-foreground-6 = #ff5555
+bar-foreground-0 = ${colors.primary}
+bar-foreground-1 = ${colors.primary}
+bar-foreground-2 = ${colors.primary}
+bar-foreground-3 = ${colors.primary}
+bar-foreground-4 = ${colors.primary}
+bar-foreground-5 = ${colors.alert}
+bar-foreground-6 = ${colors.alert}
 bar-gradient = false
 bar-indicator = |
 bar-indicator-font = 2
