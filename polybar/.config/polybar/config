@@ -161,13 +161,16 @@ format = <bar-used>
 bar-used-width = 30
 bar-used-foreground-0 = ${colors.primary}
 bar-used-foreground-1 = ${colors.primary}
-bar-used-foreground-2 = ${colors.alert}
-bar-used-foreground-3 = ${colors.alert}
-bar-used-indicator = |
+bar-used-foreground-2 = ${colors.primary}
+bar-used-foreground-3 = ${colors.primary}
+bar-used-foreground-4 = ${colors.primary}
+bar-used-foreground-5 = ${colors.alert}
+bar-volume-gradient = false
+bar-used-indicator = ""
 bar-used-indicator-font = 2
-bar-used-fill = ─
+bar-used-fill = █
 bar-used-fill-font = 2
-bar-used-empty = ─
+bar-used-empty = █
 bar-used-empty-font = 2
 bar-used-empty-foreground = ${colors.background-alt}
 
@@ -497,7 +500,7 @@ bar-fill = ─
 bar-fill-font = 2
 bar-empty = ─
 bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
+bar-empty-foreground = ${colors.background-alt}
 
 [module/external_backlight_ipc]
 ; control the external monitor brightness (not the actual backlight power)

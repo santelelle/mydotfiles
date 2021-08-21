@@ -20,11 +20,11 @@ super + Escape
 
 # open bspwm config and load it
 super + b
-	st -e nvim $HOME/.config/bspwm/bspwmrc && $HOME/.config/bspwm/bspwmrc
+	st -c windows_rules -e nvim $HOME/.config/bspwm/bspwmrc_rules && $HOME/.config/bspwm/bspwmrc
 
 # open the util to check the xwindow name
 super + w
-	st -e sh -c 'xprop && read line'
+	st -c xprop -e sh -c 'xprop && read line'
 
 super + g
 	google-chrome-stable
