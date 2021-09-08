@@ -3,6 +3,8 @@ let mapleader = ","
 nnoremap <C-o> <C-i>zz10<C-e>
 nnoremap <C-i> <C-o>zz10<C-e>
 nnoremap <leader>sv :source ~/.ideavimrc<CR>
+nnoremap <leader>ev :edit ~/.ideavimrc<CR>
+nnoremap <leader>q :close<CR>
 nnoremap zz za
 nnoremap ]z zj
 nnoremap [z zk
@@ -19,6 +21,9 @@ nnoremap K k<C-y>
 nnoremap <C-K> <C-u>z.
 nnoremap <C-J> <C-d>z.
 
+nnoremap <leader>c ia<Esc>
+
+set incsearch
 set easymotion
 set surround
 set commentary

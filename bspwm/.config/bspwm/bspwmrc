@@ -9,7 +9,7 @@ xrdb -merge $HOME/.Xresources
 external_monitor_name=$(xrandr --query | grep -v -w eDP-1 | grep -w connected | awk '{print $1}')
 
 # check if there is an external monitor
-if [ -n $external_monitor_name ]; then
+if [ -n "$external_monitor_name" ]; then
 	echo "found external monitor $external_monitor_name"
 	# export two env variable to be used by polybar
 	export MAIN_MONITOR=$external_monitor_name
