@@ -51,4 +51,7 @@ bspc rule -a scratchpad sticky=on state=floating hidden=on
 
 $HOME/.config/bspwm/bspwmrc_rules
 
+killall picom
+picom --config $HOME/.config/picom/picom.conf &
+
 echo "finish bspwmrc loading"
