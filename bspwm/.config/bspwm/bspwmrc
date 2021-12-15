@@ -15,6 +15,7 @@ if [ -n "$external_monitor_name" ]; then
 	export MAIN_MONITOR=$external_monitor_name
 	export SECOND_MONITOR="eDP-1"
 	# configure the two monitors
+	# xrandr --output $external_monitor_name --primary --mode 1920x1080 --right-of eDP-1 --output eDP-1 --mode 1920x1080
 	xrandr --output $external_monitor_name --primary --mode 3440x1440 --right-of eDP-1 --output eDP-1 --mode 1920x1080
 
 	bspc monitor $external_monitor_name -d 1 2 3 4 5 6
@@ -52,6 +53,11 @@ bspc rule -a scratchpad sticky=on state=floating hidden=on
 $HOME/.config/bspwm/bspwmrc_rules
 
 killall picom
-picom --config $HOME/.config/picom/picom.conf &
+picom --config $HOME/.config/picom/picom.conf --experimental-backend &
 
 echo "finish bspwmrc loading"
+xset s off -dpms
+
+# launch the matplotlib tabber
+killall automatic_tabbed
+$HOME/.config/bspwm/automatic_tabbed &

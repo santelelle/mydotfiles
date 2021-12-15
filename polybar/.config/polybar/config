@@ -47,6 +47,20 @@ scroll-up = bspwm.prev
 scroll-down = bspwm.next
 enable-ipc = true
 
+[bar/laptop_main]
+inherit = section/polybar_common
+monitor = eDP-1
+
+modules-left = bspwm
+modules-center = cpu temperature fanspeed memory 
+modules-right = backlight pulseaudio wlan battery powermenu date
+
+tray-position = left
+tray-offset-x = 10%
+tray-padding = 2
+tray-detached = true
+wm-restack = bspwm
+
 [bar/laptop]
 inherit = section/polybar_common
 monitor = eDP-1
@@ -255,6 +269,8 @@ animation-packetloss-framerate = 500
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
+;click-middle = pulseaudio-equalizer-gtk
+click-right = sudo wifi-menu
 
 [module/date]
 type = internal/date

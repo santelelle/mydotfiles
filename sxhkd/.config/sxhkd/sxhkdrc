@@ -22,6 +22,7 @@ super + Escape
 super + b
 	st -c windows_rules -e nvim $HOME/.config/bspwm/bspwmrc_rules && $HOME/.config/bspwm/bspwmrc
 
+########################## SHORTCUTS
 # open the util to check the xwindow name
 super + w
 	st -c xprop -e sh -c 'xprop && read line'
@@ -34,6 +35,9 @@ super + shift + e
 
 super + e
 	st -e ranger
+
+super + p
+	pycharm
 
 Print + shift
 	scrot ~/Screens/%b%d_%H%M%S.png
