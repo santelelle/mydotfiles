@@ -27,7 +27,7 @@ call plug#begin()
   :Plug 'vim-airline/vim-airline'
   :Plug 'bling/vim-bufferline'
   " Git
-  :Plug 'tpope/vim-fugitive'
+  " :Plug 'tpope/vim-fugitive'
   " Others
   :Plug 'tpope/vim-surround'
   :Plug 'sainnhe/gruvbox-material'
