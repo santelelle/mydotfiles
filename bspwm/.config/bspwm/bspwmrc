@@ -62,14 +62,6 @@ xset s off -dpms
 killall automatic_tabbed
 $HOME/.config/bspwm/automatic_tabbed &
 
-# lauch timeular if not already running
-if pgrep -x timeular >/dev/null 
-then 
-	echo "timeular already running" 
-else
-	echo "launcing timeular" && /bin/timeular &
-fi
-
 # lauch insync if not already running
 if pgrep -x insync >/dev/null 
 then 
@@ -86,10 +78,18 @@ else
 	echo "launcing discord" && /bin/discord & 
 fi
 
+# # lauch timeular if not already running
+# if pgrep -x timeular >/dev/null 
+# then 
+# 	echo "timeular already running" 
+# else
+# 	echo "launcing timeular" && /bin/timeular &
+# fi
+
 # lauch mailspring if not already running
-if pgrep -x mailspring >/dev/null 
-then
-	echo "mailspring already running" 
-else
-	echo "launcing mailspring" && /bin/mailspring &
-fi
+# if pgrep -x mailspring >/dev/null 
+# then
+# 	echo "mailspring already running" 
+# else
+# 	echo "launcing mailspring" && /bin/mailspring &
+# fi

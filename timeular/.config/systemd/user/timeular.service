@@ -1,0 +1,9 @@
+[Unit]
+Description=Timeular service
+After=bluetooth.target
+
+[Service]
+ExecStart=/usr/bin/timeular
+
+[Install]
+WantedBy=multi-user.target

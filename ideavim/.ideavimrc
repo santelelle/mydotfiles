@@ -27,4 +27,5 @@ set incsearch
 set easymotion
 set surround
 set commentary
+set number
 set relativenumber
