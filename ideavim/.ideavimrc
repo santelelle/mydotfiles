@@ -4,6 +4,7 @@ nnoremap <C-o> <C-i>zz10<C-e>
 nnoremap <C-i> <C-o>zz10<C-e>
 nnoremap <leader>sv :source ~/.ideavimrc<CR>
 nnoremap <leader>ev :edit ~/.ideavimrc<CR>
+nnoremap <leader>w :write<CR>
 nnoremap <leader>q :close<CR>
 nnoremap zz za
 nnoremap ]z zj
@@ -23,8 +24,28 @@ nnoremap <C-J> <C-d>z.
 
 nnoremap <leader>c ia<Esc>
 
+vnoremap p "_dP
+set incsearch
+set hlsearch
+
 set incsearch
 set easymotion
 set surround
 set commentary
 set number relativenumber
+
+" easymotion mappings
+map <Leader> <Plug>(easymotion-prefix)
+
+" custom mapping
+nnoremap <silent> <Esc> :noh<CR><Esc>
+nnoremap vi) va(
+nnoremap vi] va[
+nnoremap vi} va{
+
+" script to be able to apply a macro from visual mode on multiple line
+" xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+" function! ExecuteMacroOverVisualRange()
+"   echo "@".getcmdline()
+"   execute ":'<,'>normal @".nr2char(getchar())
+" endfunction
