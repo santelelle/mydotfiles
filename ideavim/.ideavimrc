@@ -1,5 +1,8 @@
 let mapleader = ","
-# invert <C-o> and <C-i> and move cursor in the top middle of the screed
+" Have j and k navigate visual lines rather than logical ones
+nmap j gj
+nmap k gk
+" invert <C-o> and <C-i> and move cursor in the top middle of the screed
 nnoremap <C-o> <C-i>zz10<C-e>
 nnoremap <C-i> <C-o>zz10<C-e>
 nnoremap <leader>sv :source ~/.ideavimrc<CR>
