@@ -1,14 +1,13 @@
 #! /bin/sh
 
 # load Xresources
-# xrdb -merge $HOME/.Xresources
+xrdb -merge $HOME/.Xresources
 
 # run the xrandr command if an external monitor is connected to the
 # laptop.  This must be executed before the polybar command, so that
 # polybar can set the two separate bars properly.
-external_monitor_name=$(xrandr --query | grep -v -w eDP-1 | grep -w connected | awk '{print $1}')
-
-# check if there is an external monitor
+# external_monitor_name=$(xrandr --query | grep -v -w eDP-1 | grep -w connected | awk '{print $1}') 
+# # check if there is an external monitor
 # if [ -n "$external_monitor_name" ]; then
 	# echo "found external monitor $external_monitor_name"
 	# export MAIN_MONITOR=$external_monitor_name
@@ -28,12 +27,22 @@ external_monitor_name=$(xrandr --query | grep -v -w eDP-1 | grep -w connected | 
 	# bspc monitor eDP-1 -d 1 2 3 4 5 6
 # fi
 
-# $XDG_CONFIG_HOME/polybar/launch.sh
+# confibure the bspwm positions
+xrandr --output HDMI-1 --primary --mode 1920x1080 --right-of HDMI-2 --output HDMI-2 --mode 1920x1080
+# export bspwm names
+bspc monitor HDMI-1 -d 1 2 3 4 5 6
+bspc monitor HDMI-2 -d 7 8 9
+
+.config/polybar/launch.sh
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc config border_width         3
+bspc config border_width         5
 bspc config window_gap           5
+g=`expr $(bspc config border_width) + $(bspc config window_gap)`
+[[ "$g" -gt 0 ]] && for p in top bottom left right; do
+    bspc config "${p}_padding" "-${g}"
+done
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
@@ -41,21 +50,22 @@ bspc config gapless_monocle      true
 bspc config focus_follows_pointer true
 bspc config pointer_follows_monitor true
 
-bspc config focused_border_color \#466349
-bspc config normal_border_color \#303030
+bspc config focused_border_color \#cc241d
+bspc config normal_border_color \#466349
 # disable focus stealing
 bspc config ignore_ewmh_focus true
 
-# scratchpad
-# bspc rule -a scratchpad sticky=on state=floating hidden=on
-
-# $HOME/.config/bspwm/bspwmrc_rules
+# scratchpad rules
+bspc rule -a scratchpad sticky=on state=floating hidden=on rectangle=1900x1060+5+5
+$HOME/.config/bspwm/bspwmrc_rules
 
 # killall picom
-# picom --config $HOME/.config/picom/picom.conf --experimental-backend &
+picom --config $HOME/.config/picom/picom.conf --experimental-backend &
 
-# echo "finish bspwmrc loading"
-# xset s off -dpms
+echo "finish bspwmrc loading"
+xset s off -dpms
+# set keyboard rate
+xset r rate 170 33
 
 # launch the matplotlib tabber
 # killall automatic_tabbed

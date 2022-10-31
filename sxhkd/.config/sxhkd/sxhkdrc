@@ -40,7 +40,8 @@ super + p
 	pycharm
 
 Print + shift
-	scrot ~/Screens/%b%d_%H%M%S.png
+	# scrot ~/Screens/%b%d_%H%M%S.png
+	spectacle
 
 # save the screen in tmp and copy it to the clipboard
 Print

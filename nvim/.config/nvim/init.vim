@@ -1,11 +1,11 @@
 " vim-plug plugin installer
 call plug#begin()
   " LSP
-  :Plug 'neovim/nvim-lspconfig'
+"  :Plug 'neovim/nvim-lspconfig'
   " commenting
   :Plug 'tpope/vim-commentary'
   " Treesitter
-  :Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+"  :Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 " "  :Plug 'nvim-treesitter/playground'
   " :Plug 'dense-analysis/ale'
   " Auto close brakets
@@ -39,25 +39,25 @@ lua << EOF
 --    vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc') 
 --  end
 
-  require'lspconfig'.pyls.setup{
-    -- on_attach = custom_lsp_attach;
-    -- on_attach = require'completion'.on_attach;
-    on_attach = function(client)
-      require'completion'.on_attach(client)
-      require'illuminate'.on_attach(client)
-    end,
-  }
+--  require'lspconfig'.pyls.setup{
+--    -- on_attach = custom_lsp_attach;
+--    -- on_attach = require'completion'.on_attach;
+--    on_attach = function(client)
+--      require'completion'.on_attach(client)
+--      require'illuminate'.on_attach(client)
+--    end,
+--  }
  
 -- completely disable diagnostics
 --  vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
 
-  require'nvim-treesitter.configs'.setup{
-    highlight = {
-      enable = true,
-      updatetime = 2000,
-      use_languagetree = false,
-    },
-  }
+--  require'nvim-treesitter.configs'.setup{
+--    highlight = {
+--      enable = true,
+--      updatetime = 2000,
+--      use_languagetree = false,
+--    },
+--  }
 
 --  require'shade'.setup{
 --    overlay_opacity = 50,

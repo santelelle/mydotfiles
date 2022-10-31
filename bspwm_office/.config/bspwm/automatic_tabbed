@@ -1,0 +1,31 @@
+#!/bin/bash
+
+bspc subscribe node_add | while read -r line; do
+    # echo "Output updated!"
+    # echo "New output is: $line"
+    new_window_id=$(echo $line | awk '{print $5}')
+    echo "new window id $new_window_id"
+    # tr -d \" delete all the "
+    new_window_name=$(xprop -id $new_window_id WM_CLASS | awk '{print $4}' | tr -d \")
+    echo "new window name $new_window_name"
+
+    # chech if the name is matplotlib
+    if [ "$new_window_name" = "matplotlib" ]; then
+        echo "FOUND"
+	# check if there is a tabbed instance open
+	# classname is the second string in WM_CLASS, the first is class
+        tab_window_id=$(xdotool search --classname "^tabbed_matplotlib")
+	if [ -z $tab_window_id ]; then
+	    # open the tabbed window
+	    echo "no existing tabbed_matplotlib, opening new tabbed_matplotlib"
+	    tabbed -n tabbed_matplotlib&
+	    sleep 0.1
+            tab_window_id=$(xdotool search --classname "^tabbed_matplotlib")
+	    echo "tab_window_id $tab_window_id"
+	else
+	    echo "tabbed windows exist"
+	fi
+	xdotool windowreparent $new_window_id $tab_window_id
+    fi
+
+done
