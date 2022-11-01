@@ -37,7 +37,9 @@ alias cl="clear"
 alias cd.="cd .."
 
 # fzf stuff
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
 export FZF_DEFAULT_OPTS="--reverse --inline-info --preview 'bat --style=numbers --color=always --line-range :500 {}' --preview-window='right:hidden:wrap' --bind='f2:toggle-preview'"
 
@@ -57,6 +59,35 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+#
+# conda fix the agnoster path
+prompt_virtualenv() {
+  # Get the name of the virtual environment if one is active
+  if [[ -n $VIRTUAL_ENV ]]; then
+    local env_label=" $(basename $VIRTUAL_ENV) "
+  fi
+
+  # Get the name of the Anaconda environment if one is active
+  if [[ -n $CONDA_PREFIX ]]; then
+      if [[ $(basename $CONDA_PREFIX) == "miniconda3" ]]; then
+        # Without this, it would display conda version
+        env_label="base"
+      else
+        if [[ -n $env_label ]]; then
+	  env_label+="+ $(basename $CONDA_PREFIX) "
+	else
+          local env_label=" $(basename $CONDA_PREFIX) "
+        fi
+      fi
+  fi
+
+  # Draw prompt segment if a virtual/conda environment is active
+  if [[ -n $env_label ]]; then
+    color=cyan
+    prompt_segment $color $PRIMARY_FG
+    print -Pn $env_label
+  fi
+}
 
 HISTSIZE=10000
 HISEFILESIZE=10000

@@ -1,7 +1,11 @@
 " vim-plug plugin installer
 call plug#begin()
+<<<<<<< HEAD
   " commenting
   :Plug 'tpope/vim-commentary'
+  " commenting
+  :Plug 'tpope/vim-commentary'
+  :Plug 'RRethy/vim-illuminate'
   " Fzf
   :Plug 'junegunn/fzf.vim'
   :Plug 'junegunn/fzf', {'do': { -> fzf#install }}
@@ -17,6 +21,47 @@ call plug#begin()
   :Plug 'sainnhe/gruvbox-material'
   :Plug 'sunjon/shade.nvim'
 call plug#end()
+
+" AUTOSTORE VIEW
+let g:skipview_files = ['[EXAMPLE PLUGIN BUFFER]']
+function! MakeViewCheck()
+    if has('quickfix') && &buftype =~ 'nofile'
+        " Buffer is marked as not a file
+        return 0
+    endif
+    if empty(glob(expand('%:p')))
+        " File does not exist on disk
+        return 0
+    endif
+    if len($TEMP) && expand('%:p:h') == $TEMP
+        " We're in a temp dir
+        return 0
+    endif
+    if len($TMP) && expand('%:p:h') == $TMP
+        " Also in temp dir
+        return 0
+    endif
+    if index(g:skipview_files, expand('%')) >= 0
+        " File is in skip list
+        return 0
+    endif
+    return 1
+endfunction
+
+function! LoadView() abort
+   try
+       loadview
+   catch /E484/
+       return
+   endtry
+endfunction
+
+augroup vimrcAutoView
+    autocmd!
+    " Autosave & Load Views.
+    autocmd BufWritePost,BufLeave,WinLeave ?* if MakeViewCheck() | mkview | endif
+    autocmd BufWinEnter ?* if MakeViewCheck() | silent call LoadView() | endif
+augroup end
 
 " Gruvbox colors
 if has('termguicolors')
@@ -130,6 +175,13 @@ endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 let g:bufferline_echo = 0
 
+let mapleader=','
+" Gitgutter
+let g:gitgutter_sign_added = '🥒'
+let g:gitgutter_sign_modified = '🥔'
+let g:gitgutter_sign_removed = '🍉'
+let g:gitgutter_map_keys = 0
+
 " Sets
 set ignorecase
 set smartcase
@@ -160,12 +212,6 @@ set shell=/bin/zsh
 set foldcolumn=auto:9
 
 " Personal keybindings
-let mapleader=','
-" Gitgutter
-let g:gitgutter_sign_added = '🥒'
-let g:gitgutter_sign_modified = '🥔'
-let g:gitgutter_sign_removed = '🍉'
-let g:gitgutter_map_keys = 0
 nmap <leader>g <Plug>(GitGutterPreviewHunk)
 nmap <leader>gg <Plug>(GitGutterUndoHunk)
 " nmap <leader>gs <Plug>(GitGutterStageHunk)

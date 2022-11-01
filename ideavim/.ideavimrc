@@ -5,11 +5,22 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-multiple-cursors'
 
+set hlsearch
+set incsearch
+set easymotion
+set surround
+set commentary
+set number relativenumber
+
+" Have j and k navigate visual lines rather than logical ones
+nmap j gj
+nmap k gk
 " invert <C-o> and <C-i> and move cursor in the top middle of the screed
 nnoremap <C-o> <C-i>zz10<C-e>
 nnoremap <C-i> <C-o>zz10<C-e>
 nnoremap <leader>sv :source ~/.ideavimrc<CR>
 nnoremap <leader>ev :edit ~/.ideavimrc<CR>
+nnoremap <leader>w :write<CR>
 nnoremap <leader>q :close<CR>
 " nnoremap zz za
 nnoremap ]z zj
@@ -30,9 +41,20 @@ nnoremap <C-J> <C-d>z.
 map s <Plug>(easymotion-f)
 map S <Plug>(easymotion-s)
 
-set incsearch
-" set easymotion
-" set surround
-" set commentary
-set number
-set relativenumber
+vnoremap p "_dP
+
+" easymotion mappings
+map <Leader> <Plug>(easymotion-prefix)
+
+" custom mapping
+nnoremap <silent> <Esc> :noh<CR><Esc>
+nnoremap vi) va(
+nnoremap vi] va[
+nnoremap vi} va{
+
+" script to be able to apply a macro from visual mode on multiple line
+" xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+" function! ExecuteMacroOverVisualRange()
+"   echo "@".getcmdline()
+"   execute ":'<,'>normal @".nr2char(getchar())
+" endfunction
