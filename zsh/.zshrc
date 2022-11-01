@@ -37,7 +37,6 @@ alias cl="clear"
 alias cd.="cd .."
 
 # fzf stuff
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'

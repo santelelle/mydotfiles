@@ -1,6 +1,5 @@
 " vim-plug plugin installer
 call plug#begin()
-<<<<<<< HEAD
   " commenting
   :Plug 'tpope/vim-commentary'
   " commenting

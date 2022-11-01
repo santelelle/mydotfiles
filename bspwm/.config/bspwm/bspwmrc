@@ -8,27 +8,26 @@
 # polybar can set the two separate bars properly.
 external_monitor_name=$(xrandr --query | grep -v -w eDP-1 | grep -w connected | awk '{print $1}')
 
-# check if there is an external monitor
-# if [ -n "$external_monitor_name" ]; then
-	# echo "found external monitor $external_monitor_name"
-	# export MAIN_MONITOR=$external_monitor_name
-	# export SECOND_MONITOR="eDP-1"
-	# # configure the two monitors
+check if there is an external monitor
+if [ -n "$external_monitor_name" ]; then
+	echo "found external monitor $external_monitor_name"
+	export MAIN_MONITOR=$external_monitor_name
+	export SECOND_MONITOR="eDP-1"
+	# configure the two monitors
 	# # xrandr --output $external_monitor_name --primary --mode 1920x1080 --right-of eDP-1 --output eDP-1 --mode 1920x1080
-	# xrandr --output $external_monitor_name --primary --mode 3440x1440 --right-of eDP-1 --output eDP-1 --mode 1920x1080
-# 
-	# bspc monitor $external_monitor_name -d 1 2 3 4 5 6
-	# bspc monitor eDP-1 -d 7 8 9
-	# bspc monitor $external_monitor_name -s eDP-1
-# else
-	# echo "no external monitors detected"
-	# export MAIN_MONITOR="eDP-1"
-	# unset SECOND_MONITOR
-# 
-	# bspc monitor eDP-1 -d 1 2 3 4 5 6
-# fi
+	xrandr --output $external_monitor_name --primary --mode 3440x1440 --right-of eDP-1 --output eDP-1 --mode 1920x1080
 
-# $XDG_CONFIG_HOME/polybar/launch.sh
+	bspc monitor $external_monitor_name -d 1 2 3 4 5 6
+	bspc monitor eDP-1 -d 7 8 9
+	bspc monitor $external_monitor_name -s eDP-1
+else
+	echo "no external monitors detected"
+	export MAIN_MONITOR="eDP-1"
+	unset SECOND_MONITOR
+	bspc monitor eDP-1 -d 1 2 3 4 5 6
+fi
+
+$XDG_CONFIG_HOME/polybar/launch.sh
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
@@ -53,31 +52,31 @@ bspc rule -a obsidian sticky=on state=floating hidden=on
 # defined rules
 $HOME/.config/bspwm/bspwmrc_rules
 
-# killall picom
-# picom --config $HOME/.config/picom/picom.conf --experimental-backend &
+killall picom
+picom --config $HOME/.config/picom/picom.conf --experimental-backend &
 
-# echo "finish bspwmrc loading"
-# xset s off -dpms
+echo "finish bspwmrc loading"
+xset s off -dpms
 
 # launch the matplotlib tabber
-# killall automatic_tabbed
-# $HOME/.config/bspwm/automatic_tabbed &
+killall automatic_tabbed
+$HOME/.config/bspwm/automatic_tabbed &
 
 # lauch insync if not already running
-# if pgrep -x insync >/dev/null 
-# then 
-	# echo "insync already running" 
-# else
-	# echo "launcing insync" && /bin/insync start &
-# fi
+if pgrep -x insync >/dev/null 
+then 
+	echo "insync already running" 
+else
+	echo "launcing insync" && /bin/insync start &
+fi
 
 # lauch discord if not already running
-# if pgrep -x Discord >/dev/null 
-# then
-	# echo "discord already running" 
-# else
-	# echo "launcing discord" && /bin/discord & 
-# fi
+if pgrep -x Discord >/dev/null 
+then
+	echo "discord already running" 
+else
+	echo "launcing discord" && /bin/discord & 
+fi
 
 # # lauch timeular if not already running
 # if pgrep -x timeular >/dev/null 
