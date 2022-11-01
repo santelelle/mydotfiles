@@ -1,193 +1,27 @@
 " vim-plug plugin installer
 call plug#begin()
-  " LSP
-  :Plug 'neovim/nvim-lspconfig'
   " commenting
   :Plug 'tpope/vim-commentary'
-  " Treesitter
-  :Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-" "  :Plug 'nvim-treesitter/playground'
-  " :Plug 'dense-analysis/ale'
-  " Auto close brakets
-  " :Plug 'jiangmiao/auto-pairs'
-  " Highlighting same word
-  :Plug 'RRethy/vim-illuminate'
   " Fzf
   :Plug 'junegunn/fzf.vim'
   :Plug 'junegunn/fzf', {'do': { -> fzf#install }}
-  " Completion
-  :Plug 'nvim-lua/completion-nvim'
   " Git signs on the left bar
   :Plug 'airblade/vim-gitgutter'
   " Tree folder view
   :Plug 'preservim/nerdtree'
-  " Undotree
-  :Plug 'mbbill/undotree'
   " Statusbar
   :Plug 'vim-airline/vim-airline'
   :Plug 'bling/vim-bufferline'
-  " Git
-  " :Plug 'tpope/vim-fugitive'
   " Others
   :Plug 'tpope/vim-surround'
   :Plug 'sainnhe/gruvbox-material'
   :Plug 'sunjon/shade.nvim'
 call plug#end()
 
-lua << EOF
---  local custom_lsp_attach = function(client)
---    vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc') 
---  end
-
-  require'lspconfig'.pyls.setup{
-    -- on_attach = custom_lsp_attach;
-    -- on_attach = require'completion'.on_attach;
-    on_attach = function(client)
-      require'completion'.on_attach(client)
-      require'illuminate'.on_attach(client)
-    end,
-  }
- 
--- completely disable diagnostics
---  vim.lsp.callbacks["textDocument/publishDiagnostics"] = function() end
-
-  require'nvim-treesitter.configs'.setup{
-    highlight = {
-      enable = true,
-      updatetime = 2000,
-      use_languagetree = false,
-    },
-  }
-
---  require'shade'.setup{
---    overlay_opacity = 50,
---    opacity_step = 1,
---    keys = {
---      brightness_up    = '<C-Up>',
---      brightness_down  = '<C-Down>',
---      toggle           = '<Leader>s',
---    }
---  }
-EOF
-
-" AUTOSTORE VIEW
-let g:skipview_files = ['[EXAMPLE PLUGIN BUFFER]']
-function! MakeViewCheck()
-    if has('quickfix') && &buftype =~ 'nofile'
-        " Buffer is marked as not a file
-        return 0
-    endif
-    if empty(glob(expand('%:p')))
-        " File does not exist on disk
-        return 0
-    endif
-    if len($TEMP) && expand('%:p:h') == $TEMP
-        " We're in a temp dir
-        return 0
-    endif
-    if len($TMP) && expand('%:p:h') == $TMP
-        " Also in temp dir
-        return 0
-    endif
-    if index(g:skipview_files, expand('%')) >= 0
-        " File is in skip list
-        return 0
-    endif
-    return 1
-endfunction
-
-function! LoadView() abort
-   try
-       loadview
-   catch /E484/
-       return
-   endtry
-endfunction
-
-augroup vimrcAutoView
-    autocmd!
-    " Autosave & Load Views.
-    autocmd BufWritePost,BufLeave,WinLeave ?* if MakeViewCheck() | mkview | endif
-    autocmd BufWinEnter ?* if MakeViewCheck() | silent call LoadView() | endif
-augroup end
-
-" Linting
-"let python_provider_script_path = expand('~') . '/.scripts/vim-pythonprovider'
-"if filereadable(python_provider_script_path)
-"	let g:python3_host_prog = system(python_provider_script_path)
-"endif
-" let g:ale_linters={'python': ['pyls']}
-" let g:ale_linters={'python': ['flake8', 'mypy', 'pylint']}
-"let g:ale_fixers={'python': ['black', 'isort']}
-let g:ale_autopep8 = 1
-"let g:ale_linters_explicit = 1
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
-"let g:ale_virtualtext_cursor = 1
-
-"let g:float_preview#docked = 0
-"let g:float_preview#max_width = 80
-"function! DisableExtras()
-"	call nvim_win_set_option(g:float_preview#win, 'number', v:false)
-"	call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
-"	call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
-"	call nvim_win_set_option(g:float_preview#win, 'signcolumn', 'no')
-"endfunction
-"autocmd User FloatPreviewWinOpen call DisableExtras()
-
-" Lsp keybingings
-"nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>z.
-"nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
-"nnoremap <silent> <C-k>  <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> gk <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> gt <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0 <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-
 " Gruvbox colors
 if has('termguicolors')
   set termguicolors
 endif
-
-function! Toggle_gruvbox_line_highlight()
-if get(g:, 'gruvbox_material_diagnostic_line_highlight') == 0
-    echo 'enabling line highlight'
-    let g:gruvbox_material_diagnostic_line_highlight = 1
-    colorscheme gruvbox-material
-  else
-    echo 'disabling line highlight'
-    let g:gruvbox_material_diagnostic_line_highlight = 0
-    colorscheme gruvbox-material
-  endif
-endfunction
-
-function! Toggle_transparent()
-  if get(g:, 'gruvbox_material_transparent_background') == 0
-    let g:gruvbox_material_transparent_background = 1
-    colorscheme gruvbox-material
-  else
-    let g:gruvbox_material_transparent_background = 0
-    colorscheme gruvbox-material
-  endif
-endfunction
-
-let t:is_dark = 1
-function! Toggle_dark_light()
-  if t:is_dark == 1
-    echo 'setting light'
-    let t:is_dark = 0
-    let g:gruvbox_material_palette = t:my_light_palette
-    colorscheme gruvbox-material
-  else
-    echo 'setting dark'
-    let t:is_dark = 1
-    let g:gruvbox_material_palette = t:my_dark_palette
-    colorscheme gruvbox-material
-  endif
-endfunction
 
 let g:gruvbox_material_enable_italic = 1
 let g:gruvbox_material_enable_bold = 1
@@ -272,33 +106,11 @@ autocmd Filetype python setlocal foldmethod=indent foldignore=
 " autocmd Filetype python setlocal foldmethod=expr
 "set foldexpr=FoldMethod(v:lnum)
 
-"function! FoldMethod(lnum)
-"  "get string of current line
-"  let crLine=getline(a:lnum)
-
-"  " check if empty line 
-"  if empty(crLine) "Empty line or end comment 
-"    return -1 " so same indent level as line before 
-"  endif 
-
-"  " check if comment 
-"  let a:data=join( map(synstack(a:lnum, 1), 'synIDattr(v:val, "name")') )
-"  if a:data =~ ".*omment.*"
-"    return '='
-"  endif
-
-"  "Otherwise return foldlevel equal to indent /shiftwidth (like if
-"  "foldmethod=indent)
-"  else  "return indent base fold
-"    return indent(a:lnum)/&shiftwidth
-"endfunction
-
 " Airline, this is needed to be shure that the variable are set after airline is initialized
 let g:airline_section_y = ''
 let g:airline_extensions = ['bufferline', 'hunks']
 function! AirlineInit()
   " let g:airline_section_y = ''
-  
   let g:airline_powerline_fonts = 1
   let g:airline_left_sep = ''
   let g:airline_left_alt_sep = ''
@@ -309,7 +121,6 @@ function! AirlineInit()
   let g:airline_symbols.linenr = '☰'
   let g:airline_symbols.maxlinenr = ''
   let g:airline_symbols.dirty='⚡'
-
   " let g:bufferline_echo = 0
   let g:bufferline_active_buffer_left = '['
   let g:bufferline_active_buffer_right = ']'
@@ -348,32 +159,8 @@ set scrolloff=1
 set shell=/bin/zsh
 set foldcolumn=auto:9
 
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-	\ <SID>check_back_space() ? "<TAB>" :
-	\ pumvisible() ? "<C-n>" : completion#trigger_completion()
-"	\ completion#trigger_completion()
-"inoremap <silent><expr> <S-TAB> pumvisible() ? "<C-p>" : "<S-TAB>"
-inoremap <silent><expr> <Down> pumvisible() ? "<C-n>" : "<Down>"
-inoremap <silent><expr> <Up> pumvisible() ? "<C-p>" : "<Up>"
-
 " Personal keybindings
 let mapleader=','
-" Quickfix stuff
-command! Cnext try | cnext | catch | cfirst | catch | endtry
-command! Cprev try | cprev | catch | clast | catch | endtry
-cmap cqf ccl
-nnoremap <leader>` :ccl<CR>
-nnoremap [q :Cprev<CR>
-nnoremap ]q :Cnext<CR>
-nnoremap [Q :cfirst<CR>
-nnoremap ]Q :clast<CR>
-" ALE
-nnoremap <leader>a :ALEToggle<CR>
 " Gitgutter
 let g:gitgutter_sign_added = '🥒'
 let g:gitgutter_sign_modified = '🥔'
@@ -447,9 +234,3 @@ noremap <leader>3 3gt
 noremap <leader>4 4gt
 noremap <leader>5 5gt
 noremap <leader>6 6gt
-" current folder terminal launch
-map <F7> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
-
-"Personal commands
-"autocmd FileType python map <buffer> <leader>x :w<CR> :exec '!python' shellescape(@%, 1)<CR>
-nmap <leader>x :w<CR> :exec '!python' shellescape(@%, 1)<CR>

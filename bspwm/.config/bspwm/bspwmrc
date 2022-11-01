@@ -49,7 +49,8 @@ bspc config ignore_ewmh_focus true
 
 # scratchpad
 bspc rule -a scratchpad sticky=on state=floating hidden=on
-
+# obsidian
+bspc rule -a obsidian sticky=on state=floating hidden=on
 $HOME/.config/bspwm/bspwmrc_rules
 
 killall picom
@@ -93,3 +94,5 @@ fi
 # else
 # 	echo "launcing mailspring" && /bin/mailspring &
 # fi
+#
+export GTK_USE_PORTAL=1

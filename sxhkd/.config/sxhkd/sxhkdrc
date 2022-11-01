@@ -77,6 +77,9 @@ super + {_,shift + }{1-9,0}
 
 ctrl + space
 	~/.config/bspwm/scratch scratchpad
+
+super + o
+	~/.config/bspwm/obsidian obsidian
 # ctrl + space
 # 	id=$(cat /tmp/scratchid);\
 # 	bspc node $id --flag hidden;bspc node -f $id

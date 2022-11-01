@@ -4,6 +4,8 @@ After=bluetooth.target
 
 [Service]
 ExecStart=/usr/bin/timeular
+Restart=on-failure
+RestartSec=1s
 
 [Install]
 WantedBy=multi-user.target
