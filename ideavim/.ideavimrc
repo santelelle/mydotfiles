@@ -11,6 +11,7 @@ set easymotion
 set surround
 set commentary
 set number relativenumber
+set listchars=tab:\|\ ,nbsp:·,trail:·
 
 " Have j and k navigate visual lines rather than logical ones
 nmap j gj
