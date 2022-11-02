@@ -127,3 +127,7 @@ alt + Tab
 # last selected desktop
 super +  Tab
 	bspc desktop -f last
+
+# lock screen
+ctrl + alt + l
+	dm-tool lock

@@ -22,6 +22,7 @@ let g:gruvbox_material_visual = 'reverse'
 colorscheme gruvbox-material
 
 " Sets
+set formatoptions=jql
 set ignorecase
 set smartcase
 set autochdir
@@ -44,7 +45,6 @@ set list
 set listchars=tab:\|\ ,nbsp:·,trail:·
 set noshowcmd
 set cursorline
-set formatoptions=jcrql
 set timeoutlen=300
 set scrolloff=1
 set shell=/bin/zsh
@@ -52,6 +52,8 @@ set foldcolumn=auto:9
 
 " Personal keybindings
 let mapleader=','
+" disable search when pressing esc
+nnoremap <esc> :noh<return><esc>
 " use by visual lines
 nnoremap j gj
 nnoremap k gk
