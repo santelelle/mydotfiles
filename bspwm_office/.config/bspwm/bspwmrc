@@ -57,6 +57,9 @@ bspc config ignore_ewmh_focus true
 
 # scratchpad rules
 bspc rule -a scratchpad sticky=on state=floating hidden=on rectangle=1900x1060+5+5
+# obisdian rules
+bspc rule -a obsidian sticky=on state=floating hidden=on rectangle=1900x1060+5+5
+# load quick rules
 $HOME/.config/bspwm/bspwmrc_rules
 
 # killall picom
