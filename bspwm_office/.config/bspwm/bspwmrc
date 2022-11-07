@@ -31,7 +31,7 @@ xrdb -merge $HOME/.Xresources
 xrandr --output HDMI-1 --primary --mode 1920x1080 --right-of HDMI-2 --output HDMI-2 --mode 1920x1080
 # export bspwm names
 bspc monitor HDMI-1 -d 1 2 3 4 5 6
-bspc monitor HDMI-2 -d 7 8 9
+bspc monitor HDMI-2 -d F1 F2 F3 F4 F5
 
 .config/polybar/launch.sh
 
@@ -57,8 +57,6 @@ bspc config ignore_ewmh_focus true
 
 # scratchpad rules
 bspc rule -a scratchpad sticky=on state=floating hidden=on rectangle=1900x1060+5+5
-# obisdian rules
-bspc rule -a obsidian sticky=on state=floating hidden=on rectangle=1900x1060+5+5
 # load quick rules
 $HOME/.config/bspwm/bspwmrc_rules
 
@@ -75,33 +73,39 @@ xset r rate 170 33
 # $HOME/.config/bspwm/automatic_tabbed &
 
 # lauch insync if not already running
-# if pgrep -x insync >/dev/null 
-# then 
-	# echo "insync already running" 
-# else
-	# echo "launcing insync" && /bin/insync start &
-# fi
+if pgrep -x insync >/dev/null 
+then 
+	echo "insync already running" 
+else
+	echo "launcing insync" && /bin/insync start &
+fi
 
 # lauch discord if not already running
-# if pgrep -x Discord >/dev/null 
-# then
-	# echo "discord already running" 
-# else
-	# echo "launcing discord" && /bin/discord & 
-# fi
+if pgrep -x Discord >/dev/null 
+then
+	echo "discord already running" 
+else
+	echo "launcing discord" && /bin/discord & 
+fi
 
-# # lauch timeular if not already running
-# if pgrep -x timeular >/dev/null 
-# then 
-# 	echo "timeular already running" 
-# else
-# 	echo "launcing timeular" && /bin/timeular &
-# fi
+# lauch timeular if not already running
+if pgrep -x Timeular >/dev/null 
+then 
+	echo "timeular already running" 
+else
+	echo "launcing timeular" && Timeular &
+fi
 
-# lauch mailspring if not already running
-# if pgrep -x mailspring >/dev/null 
-# then
-# 	echo "mailspring already running" 
-# else
-# 	echo "launcing mailspring" && /bin/mailspring &
-# fi
+# lauch birdtray if not already running
+if pgrep -x birdtray >/dev/null 
+then
+	echo "birdtray already running" 
+else
+	echo "launcing birdtray" && birdtray &
+fi
+
+# start polkit agent
+/usr/lib/polkit-kde-authentication-agent-1 &
+
+# use the us international with altgr-intl
+setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl

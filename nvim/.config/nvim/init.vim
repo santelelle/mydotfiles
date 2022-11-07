@@ -1,7 +1,8 @@
 " vim-plug plugin installer
 call plug#begin()
-  " commenting
   :Plug 'tpope/vim-commentary'
+  :Plug 'tpope/vim-fugitive'
+  :Plug 'airblade/vim-gitgutter'
   " Fzf
   :Plug 'junegunn/fzf.vim'
   :Plug 'junegunn/fzf', {'do': { -> fzf#install }}
@@ -74,6 +75,7 @@ nnoremap <leader>ep :e ~/.config/polybar/config.ini<CR>
 nnoremap <leader>es :e ~/.config/sxhkd/sxhkdrc<CR>
 nnoremap <leader>ez :e ~/.zshrc<CR>
 nnoremap <leader>el :e ~/.config/logid.cfg<CR>
+nnoremap <leader>er :e ~/.config/ranger/rc.conf<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>s :w<CR>
 " nnoremap <leader>q :bp\|bd#<CR>
