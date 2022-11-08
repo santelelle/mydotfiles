@@ -28,12 +28,12 @@ xrdb -merge $HOME/.Xresources
 # fi
 
 # confibure the bspwm positions
-xrandr --output HDMI-1 --primary --mode 1920x1080 --right-of HDMI-2 --output HDMI-2 --mode 1920x1080
+# xrandr --output HDMI-1 --primary --mode 1920x1080 --right-of HDMI-2 --output HDMI-2 --mode 1920x1080
+# the position here is a bit more the 1940 such that the window border does not exit in the other screen (see how the offsets are set below)
+xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 1940x0 --output HDMI-2 --mode 1920x1080
 # export bspwm names
 bspc monitor HDMI-1 -d 1 2 3 4 5 6
-bspc monitor HDMI-2 -d F1 F2 F3 F4 F5
-
-.config/polybar/launch.sh
+bspc monitor HDMI-2 -d F1 F2 F3 F4 F5 •
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
@@ -42,6 +42,9 @@ bspc config window_gap           5
 g=`expr $(bspc config border_width) + $(bspc config window_gap)`
 [[ "$g" -gt 0 ]] && for p in top bottom left right; do
     bspc config "${p}_padding" "-${g}"
+done
+[[ "$g" -gt 0 ]] && for p in top bottom left right; do
+    bspc config "${p}_border_width" "-${g}"
 done
 
 bspc config split_ratio          0.52
@@ -60,10 +63,9 @@ bspc rule -a scratchpad sticky=on state=floating hidden=on rectangle=1900x1060+5
 # load quick rules
 $HOME/.config/bspwm/bspwmrc_rules
 
-# killall picom
+killall picom
 picom --config $HOME/.config/picom/picom.conf --experimental-backend &
 
-echo "finish bspwmrc loading"
 xset s off -dpms
 # set keyboard rate
 xset r rate 170 33
@@ -109,3 +111,7 @@ fi
 
 # use the us international with altgr-intl
 setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl
+
+# launch polybar
+killall polybar
+polybar secondary &

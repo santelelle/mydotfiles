@@ -5,12 +5,14 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-multiple-cursors'
 
+set listchars=tab:\|\ ,nbsp:·,trail:·
 set hlsearch
 set incsearch
 set easymotion
 set surround
 set commentary
 set number relativenumber
+set ideajoin
 set listchars=tab:\|\ ,nbsp:·,trail:·
 
 " Have j and k navigate visual lines rather than logical ones
@@ -26,8 +28,9 @@ nnoremap <leader>q :close<CR>
 " nnoremap zz za
 nnoremap ]z zj
 nnoremap [z zk
-" Remove the stupid x storing in the buffer
+" Remove the stupid storing in the buffer
 nnoremap x "_x
+nnoremap D "_D
 " Yank till the end of the line
 nnoremap Y y$
 " joinlines with H

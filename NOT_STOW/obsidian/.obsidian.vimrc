@@ -14,7 +14,7 @@ nmap Y y$
 nmap <C-k> <C-u>z.
 nmap <C-j> <C-d>z.
 " move up and down one line
-nmap J jz.
-nmap K kz.
+map J jz.
+map K kz.
 " joinlines with H
-nmap H J
+noremap H J
