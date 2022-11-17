@@ -44,7 +44,7 @@ map S <Plug>(easymotion-s)
 vnoremap p "_dP
 
 " easymotion mappings
-map <Leader> <Plug>(easymotion-prefix)
+nnoremap <Leader>f <Plug>(easymotion-prefix)
 
 " custom mapping
 nnoremap <silent> <Esc> :noh<CR><Esc>

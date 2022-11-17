@@ -225,7 +225,7 @@ nnoremap <leader>f :Lines<CR>
 nnoremap <leader>ev :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>eb :e ~/.config/bspwm/bspwmrc<CR>
-nnoremap <leader>ep :e ~/.config/polybar/config<CR>
+nnoremap <leader>ep :e ~/.config/polybar/config.ini<CR>
 nnoremap <leader>es :e ~/.config/sxhkd/sxhkdrc<CR>
 nnoremap <leader>ez :e ~/.zshrc<CR>
 nnoremap <leader>el :e ~/.config/logid.cfg<CR>
