@@ -4,6 +4,7 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-multiple-cursors'
+"  Plug 'godlygeek/tabular'
 
 set listchars=tab:\|\ ,nbsp:·,trail:·
 set hlsearch
@@ -44,6 +45,8 @@ nnoremap <C-J> <C-d>z.
 " easymotion
 map s <Plug>(easymotion-f)
 map S <Plug>(easymotion-s)
+" tabular
+map T <Plug>(tabularize)
 
 vnoremap p "_dP
 

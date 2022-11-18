@@ -39,7 +39,7 @@ super + e
 super + p
 	pycharm
 
-Print + shift
+shift + Print
 	# scrot ~/Screens/%b%d_%H%M%S.png
 	spectacle
 

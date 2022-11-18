@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# ? sleep one second to check if this is enough to detect the monitors
+sleep 1
+
 # load Xresources
 xrdb -merge $HOME/.Xresources
 
@@ -64,7 +67,7 @@ bspc rule -a scratchpad sticky=on state=floating hidden=on rectangle=1900x1060+5
 $HOME/.config/bspwm/bspwmrc_rules
 
 killall picom
-picom --config $HOME/.config/picom/picom.conf --experimental-backend &
+picom --config $HOME/.config/picom/picom.conf &
 
 xset s off -dpms
 # set keyboard rate
@@ -115,3 +118,6 @@ setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl
 # launch polybar
 killall polybar
 polybar secondary &
+
+# launch dunst
+/usr/bin/dunst &
