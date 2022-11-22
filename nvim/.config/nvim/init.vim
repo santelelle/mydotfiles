@@ -1,7 +1,7 @@
 " vim-plug plugin installer
 call plug#begin()
   :Plug 'tpope/vim-commentary'
-  :Plug 'tpope/vim-fugitive'
+"  :Plug 'tpope/vim-fugitive'
   :Plug 'airblade/vim-gitgutter'
   " Fzf
   :Plug 'junegunn/fzf.vim'
