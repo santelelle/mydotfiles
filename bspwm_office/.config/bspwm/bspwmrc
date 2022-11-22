@@ -121,3 +121,6 @@ polybar secondary &
 
 # launch dunst
 /usr/bin/dunst &
+
+# disable the stupid beeping
+xset -b
