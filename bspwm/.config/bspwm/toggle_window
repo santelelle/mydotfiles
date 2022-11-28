@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 if [ -z $1 ]; then
-	echo "Usage: $0 <name of hidden obsidian window>"
+	echo "Usage: $0 <name of window>"
 	exit 1
 fi
     
