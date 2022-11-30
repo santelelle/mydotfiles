@@ -59,7 +59,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-#
+
+# in order to have this working, run $conda config --set changeps1 false
 # conda fix the agnoster path
 prompt_virtualenv() {
   # Get the name of the virtual environment if one is active
