@@ -7,6 +7,7 @@ bspc rule -a Peek state=floating
 bspc rule -a windows_rules state=floating
 bspc rule -a xprop state=floating
 bspc rule -a timeular desktop=6
+bspc rule -a Pavucontrol state=floating
 # bspc rule -a matplotlib desktop=3
 # bspc rule -a mplayer2 state=floating
 # bspc rule -a Kupfer.py focus=on
