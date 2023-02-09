@@ -76,13 +76,21 @@ super + v
 super + {t,f}
 	bspc node -t {\~tiled,\~floating}
 
-# focus or send to the given desktop using the name of the desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
+# focus the given desktop using the name of the desktop
+super + {1-9,0}
+	bspc desktop -f {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
 
-# focus or send to the given desktop using the name of the desktop
-super + {_,shift + }{F1, F2, F3, F4, F5, F6}
-	bspc {desktop -f,node -d} {F1, F2, F3, F4, F5, F6}
+# send the given desktop using the name of the desktop
+super + shift + {1-9,0}
+	bspc node -d {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
+
+# focus the given desktop using the name of the desktop
+super + {F1, F2, F3, F4, F5, F6}
+	bspc desktop -f {F1, F2, F3, F4, F5, F6}
+
+# send the given desktop using the name of the desktop
+super + shift + {F1, F2, F3, F4, F5, F6}
+	bspc node -d {F1, F2, F3, F4, F5, F6}
 
 ctrl + space
 	~/.config/bspwm/scratch scratchpad
@@ -120,6 +128,12 @@ super + ctrl + {u,i,o}
 # move current node to the preselection
 super + ctrl + n
 	~/.config/bspwm/bspwm_smart_presel
+
+# move windows around
+super + m ; {h,j,k,l} ; {h,j,k,l}
+	target=$(bspc query -N -n {west,south,north,east}) \
+	    && bspc node "$target" -p {west,south,north,east} \
+	    && bspc node -n "$target"
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}

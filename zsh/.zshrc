@@ -33,7 +33,7 @@ alias c="xclip"
 alias p="xclip -o"
 alias n="nvim"
 alias N="sudo nvim"
-alias r="ranger"
+alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias cl="clear"
 alias cd.="cd .."
 
