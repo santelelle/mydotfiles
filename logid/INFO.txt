@@ -2,4 +2,6 @@ run logid -c to set the configuration path to .config/logid.cfg
 
 edit the file /lib/systemd/system/logid.service lauching with a different configuration file as
 
-	ExecStart=/usr/bin/logid -c home/lele/.config/logid.cfg
+	ExecStart=/usr/bin/logid -c /home/lele/.config/logid.cfg
+
+also, it might be usefull change the multi-user.target to graphical.target
