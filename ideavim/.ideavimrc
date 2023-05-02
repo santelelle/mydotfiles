@@ -14,7 +14,7 @@ set surround
 set commentary
 set number relativenumber
 set ideajoin
-set listchars=tab:\|\ ,nbsp:·,trail:·
+" set listchars=tab:\|\ ,nbsp:·,trail:·
 
 " Have j and k navigate visual lines rather than logical ones
 nmap j gj

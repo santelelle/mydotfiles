@@ -77,6 +77,22 @@ xset r rate 170 33
 # killall automatic_tabbed
 # $HOME/.config/bspwm/automatic_tabbed &
 
+# start polkit agent
+/usr/lib/polkit-kde-authentication-agent-1 &
+
+# use the us international with altgr-intl
+setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl
+
+# launch polybar
+killall polybar
+polybar secondary &
+
+# launch dunst
+/usr/bin/dunst &
+
+# disable the stupid beeping
+xset -b
+
 # lauch insync if not already running
 if pgrep -x insync >/dev/null 
 then 
@@ -109,18 +125,3 @@ else
 	echo "launcing birdtray" && birdtray &
 fi
 
-# start polkit agent
-/usr/lib/polkit-kde-authentication-agent-1 &
-
-# use the us international with altgr-intl
-setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl
-
-# launch polybar
-killall polybar
-polybar secondary &
-
-# launch dunst
-/usr/bin/dunst &
-
-# disable the stupid beeping
-xset -b
