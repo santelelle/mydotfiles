@@ -1,10 +1,10 @@
-source $HOME/.antigen.zsh
+source /usr/share/zsh/share/antigen.zsh
 antigen bundle esc/conda-zsh-completion
 antigen apply
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-alias ohmyzsh="mate ~/.oh-my-zsh"
+export ZSH="/usr/share/oh-my-zsh"
+alias ohmyzsh="mate /usr/share/oh-my-zsh"
 ZSH_THEME="agnoster"
 source $ZSH/oh-my-zsh.sh
 
