@@ -8,13 +8,13 @@
 # polybar can set the two separate bars properly.
 external_monitor_name=$(xrandr --query | grep -v -w eDP-1 | grep -w connected | awk '{print $1}')
 
-check if there is an external monitor
+# check if there is an external monitor
 if [ -n "$external_monitor_name" ]; then
 	echo "found external monitor $external_monitor_name"
 	export MAIN_MONITOR=$external_monitor_name
 	export SECOND_MONITOR="eDP-1"
 	# configure the two monitors
-	# # xrandr --output $external_monitor_name --primary --mode 1920x1080 --right-of eDP-1 --output eDP-1 --mode 1920x1080
+	# xrandr --output $external_monitor_name --primary --mode 1920x1080 --right-of eDP-1 --output eDP-1 --mode 1920x1080
 	xrandr --output $external_monitor_name --primary --mode 3440x1440 --right-of eDP-1 --output eDP-1 --mode 1920x1080
 
 	bspc monitor $external_monitor_name -d 1 2 3 4 5 6

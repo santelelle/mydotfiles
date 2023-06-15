@@ -37,6 +37,7 @@ alias N="sudo nvim"
 alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias cl="clear"
 alias cd.="cd .."
+alias d.="nohup dolphin . &"
 
 # fzf stuff
 source /usr/share/fzf/completion.zsh
