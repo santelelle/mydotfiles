@@ -6,10 +6,37 @@ if [ -z $1 ]; then
 fi
     
 pids=$(xdotool search --class ${1})
-if [ -z $pids ]; then
-	obsidian
+if [ -z "$pids" ]; then
+	$1
 fi
-for pid in $pids; do
-	echo "Toggle $pid"
-	bspc node $pid --flag hidden -f
-done
+
+selected_pid=$(echo "$pids" | head -n 1)
+echo "Toggle $selected_pid"
+
+if [ -z $(bspc query -N -n "$selected_pid.hidden") ]; then
+	# the node was visible
+	
+	# read the id of the old window and focus that
+	read -r current_window_id < /tmp/old_focused.txt
+	bspc node $current_window_id -f
+
+	bspc node $selected_pid -g hidden=true
+
+else
+	# the node was hidden
+	
+	# get and store the current window focused
+	current_window_id=$(xdotool getwindowfocus)
+	echo "$current_window_id" > /tmp/old_focused.txt
+
+	bspc node $selected_pid -g hidden=false
+	bspc node $selected_pid --focus
+
+	# the following line is needed to get the obidian vim focus back to the document
+	bspc node -f 'next.local'
+
+	bspc node $selected_pid --focus
+
+	# xdotool mousemove 0 0
+	# xdotool mousemove --window "$selected_pid" --polar 0 0
+fi

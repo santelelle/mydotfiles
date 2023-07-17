@@ -74,8 +74,8 @@ xset s off -dpms
 xset r rate 170 33
 
 # launch the matplotlib tabber
-# killall automatic_tabbed
-# $HOME/.config/bspwm/automatic_tabbed &
+killall automatic_tabbed
+$HOME/.config/bspwm/automatic_tabbed &
 
 # start polkit agent
 /usr/lib/polkit-kde-authentication-agent-1 &
