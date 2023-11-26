@@ -43,10 +43,10 @@ nnoremap K k<C-y>
 nnoremap <C-K> <C-u>z.
 nnoremap <C-J> <C-d>z.
 " easymotion
-nnoremap s <Plug>(easymotion-f)
-nnoremap S <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-f)
+nmap S <Plug>(easymotion-s)
 " tabular
-nnoremap T <Plug>(tabularize)
+nmap T <Plug>(tabularize)
 
 vnoremap p "_dP
 
