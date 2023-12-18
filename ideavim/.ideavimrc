@@ -1,10 +1,9 @@
 let mapleader = ","
-Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-multiple-cursors'
-"  Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 set listchars=tab:\|\ ,nbsp:·,trail:·
 set hlsearch
@@ -44,14 +43,14 @@ nnoremap <C-K> <C-u>z.
 nnoremap <C-J> <C-d>z.
 " easymotion
 nmap s <Plug>(easymotion-f)
-nmap S <Plug>(easymotion-s)
+nmap S <Plug>(easymotion-F)
+nmap <Leader>f <Plug>(easymotion-prefix)
 " tabular
-nmap T <Plug>(tabularize)
+vmap T <Plug>(tabularize)
 
 vnoremap p "_dP
 
 " easymotion mappings
-nnoremap <Leader>f <Plug>(easymotion-prefix)
 
 " custom mapping
 nnoremap <silent> <Esc> :noh<CR><Esc>
