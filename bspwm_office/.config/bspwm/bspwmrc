@@ -114,11 +114,11 @@ else
 fi
 
 # lauch timeular if not already running
-if pgrep -x Timeular >/dev/null 
+if pgrep -x timeular >/dev/null 
 then 
 	echo "timeular already running" 
 else
-	echo "launcing timeular" && Timeular &
+	echo "launcing timeular" && timeular &
 fi
 
 # lauch birdtray if not already running
