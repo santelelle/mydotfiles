@@ -6,11 +6,11 @@ bspc subscribe node_add | while read -r line; do
     new_window_id=$(echo $line | awk '{print $5}')
     echo "new window id $new_window_id"
     # tr -d \" delete all the "
-    new_window_name=$(xprop -id $new_window_id WM_CLASS | awk '{print $4}' | tr -d \")
+    new_window_name=$(xprop -id $new_window_id WM_CLASS | awk -F'"' '{print $4}')
     echo "new window name $new_window_name"
 
     # chech if the name is matplotlib
-    if [ "$new_window_name" = "matplotlib" ]; then
+    if echo "$new_window_name" | grep -qi "matplotlib"; then
         echo "FOUND"
 	# check if there is a tabbed instance open
 	# classname is the second string in WM_CLASS, the first is class

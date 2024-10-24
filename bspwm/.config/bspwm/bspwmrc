@@ -23,6 +23,7 @@ if [ -n "$external_monitor_name" ]; then
 	bspc monitor $external_monitor_name -s eDP-1
 else
 	echo "no external monitors detected"
+	xrandr --output eDP-1 --mode 1920x1080 --primary
 	export MAIN_MONITOR="eDP-1"
 	unset SECOND_MONITOR
 	bspc monitor eDP-1 -d 1 2 3 4 5 6
@@ -64,10 +65,18 @@ $HOME/.config/bspwm/automatic_tabbed &
 # lauch discord if not already running
 if pgrep -x Discord >/dev/null 
 then
-	echo "discord already running" 
+	echo "Discord already running" 
 else
-	echo "launcing discord" && /bin/discord & 
+	echo "Launcing discord" && /bin/discord & 
 fi
+
+# # lauch timeoular if not already running
+# if pgrep -x Timeular >/dev/null 
+# then
+# 	echo "Timeular already running" 
+# else
+# 	echo "Launcing Timeular" && /bin/timeular & 
+# fi
 
 export GTK_USE_PORTAL=1
 
