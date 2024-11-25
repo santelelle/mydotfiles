@@ -36,11 +36,14 @@ xrdb -merge $HOME/.Xresources
 # xrandr --output DP-2-0 --primary --mode 2560x1440 --rate 60
 # xrandr --output DP-2-0 --primary --mode 3840x2160
 # xrandr --output HDMI-2 --primary --mode 1920x1080 --pos 1940x0 --output DP-1 --mode 2560x1440
-xrandr --output HDMI-2 --mode 1920x1080 --output DP-1 --primary --mode 3840x2160 --pos 1940x0 
+xrandr --output HDMI-1-0 --mode 1920x1080 --output DP-1 --primary --mode 3840x2160 --pos 1940x0 
+# xrandr --output HDMI-2 --mode 1920x1080 --output DP-2-0 --primary --mode 3840x2160 -r 144 --pos 1940x0 
 
 # export bspwm names
 bspc monitor DP-1 -d 1 2 3 4 5 6
-bspc monitor HDMI-2 -d F1 F2 F3 F4 F5 •
+bspc monitor HDMI-1-0 -d F1 F2 F3 F4 F5 •
+# bspc monitor DP-2-0 -d 1 2 3 4 5 6
+# bspc monitor HDMI-2 -d F1 F2 F3 F4 F5 •
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
