@@ -19,6 +19,7 @@ export EDITOR=nvim
 
 # personal alias
 alias sz="source $ZSHRC"
+alias ez="n $ZSHRC"
 alias gs="git status"
 alias gl="git log"
 alias ga="git add"
@@ -97,3 +98,11 @@ HISEFILESIZE=10000
 
 # source local definition files
 source ~/.local_definitions
+alias eld="n ~/.local_definitions"
+
+# example function for synching
+# synch_white() {
+#     echo "$(pwd)" &&
+#     rsync -e 'ssh -p 9998' -az --info=progress2 \
+#     --rsync-path="mkdir -p $(pwd) && rsync" ./ lele@localhost:"$(pwd)"/
+# }

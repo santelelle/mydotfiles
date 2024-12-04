@@ -1,9 +1,9 @@
 let mapleader = ","
-Plug 'preservim/nerdtree'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'godlygeek/tabular'
+" Plug 'preservim/nerdtree'
+" Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-commentary'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'godlygeek/tabular'
 
 set listchars=tab:\|\ ,nbsp:·,trail:·
 set hlsearch
@@ -13,7 +13,13 @@ set surround
 set commentary
 set number relativenumber
 set ideajoin
-" set listchars=tab:\|\ ,nbsp:·,trail:·
+
+set switch
+let g:switch_definitions = 'group:basic,group:java,group:rspec'
+nnoremap <leader>b :Switch<CR>
+
+set listchars=tab:\|\ ,nbsp:·,trail:·
+
 
 " Have j and k navigate visual lines rather than logical ones
 nmap j gj
@@ -44,7 +50,7 @@ nnoremap <C-J> <C-d>z.
 " easymotion
 nmap s <Plug>(easymotion-f)
 nmap S <Plug>(easymotion-F)
-nmap <Leader>f <Plug>(easymotion-prefix)
+nmap <leader>f <Plug>(easymotion-prefix)
 " tabular
 vmap T <Plug>(tabularize)
 
