@@ -99,10 +99,3 @@ HISEFILESIZE=10000
 # source local definition files
 source ~/.local_definitions
 alias eld="n ~/.local_definitions"
-
-# example function for synching
-# synch_white() {
-#     echo "$(pwd)" &&
-#     rsync -e 'ssh -p 9998' -az --info=progress2 \
-#     --rsync-path="mkdir -p $(pwd) && rsync" ./ lele@localhost:"$(pwd)"/
-# }
