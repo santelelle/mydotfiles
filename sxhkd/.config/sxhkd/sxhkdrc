@@ -69,8 +69,8 @@ super + d
 	bspc desktop -l next
 
 # Hide
-super + v
-	bspc node -g hidden
+# super + v
+# 	bspc node -g hidden
 
 # Toggle floating, tiled
 super + {t,f}

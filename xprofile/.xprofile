@@ -8,3 +8,5 @@ export PATH=$PATH:$HOME/.local/bin
 [ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# to remap "menu key" to super key
+xmodmap -pke | grep '^keycode 135 = ' # to see the configuration before
